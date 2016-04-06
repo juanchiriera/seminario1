@@ -47,7 +47,7 @@ prefix="c" %>
 
 				<div class="col-xs-12">
 					<p>Ingrese el numero de DNI del empleado del cual desea consultar las Inasistencias.</p>
-					<form class="form-horizontal" action="InasistenciasEmpleadoServlet" id="InasistenciasEmpleadoForm">
+					<form class="col-sm-3 formulario" action="InasistenciasEmpleadoServlet" id="InasistenciasEmpleadoForm">
 	 					 DNI: 
 	  					<input id="dni" type="text" name="dni" >
 	  					<br>

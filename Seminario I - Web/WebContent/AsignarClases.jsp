@@ -48,7 +48,7 @@ prefix="c" %>
 				<!-- Formularios-->
 
 				<div class="col-xs-12">
-					<form class="form-horizontal" action="AsignarClasesServletNew" id="asigarClasesForm">
+					<form class="form-horizontal col-sm-5 formulario" action="AsignarClasesServletNew" id="asigarClasesForm">
 
 						<div class="form-group">
 							<label for="profesor" class="col-sm-2 control-label">Profesor</label>

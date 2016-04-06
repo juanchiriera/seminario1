@@ -47,7 +47,7 @@ prefix="c" %>
 
 				<div class="col-xs-12">
 					<p>Ingrese el numero de DNI del empleado del cual desea consultar las clases.</p>
-					<form class="form-horizontal" action="ClasesAsignadasServlet" id="BuscarClasesAsignadasForm">
+					<form class="col-sm-3 formulario" action="ClasesAsignadasServlet" id="BuscarClasesAsignadasForm">
 	 					 DNI: 
 	  					<input id="dni" type="text" name="dni" >
 	  					<br>

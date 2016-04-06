@@ -47,7 +47,7 @@ prefix="c" %>
 
 				<div class="col-xs-12">
 					<p>Ingrese el numero de DNI del empleado del cual desea dar la Baja.</p>
-					<form class="form-horizontal" action="BajaEmpleadoServlet" id="BajaEmpleadoForm">
+					<form class="col-sm-3 formulario" action="BajaEmpleadoServlet" id="BajaEmpleadoForm">
 	 					 DNI: 
 	  					<input id="dni" type="text" name="dni" >
 	  					<br>

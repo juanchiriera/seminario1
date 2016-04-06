@@ -40,40 +40,40 @@ prefix="c" %>
 					<button type="button" style="" class="btn btn-default btn-lg">
 						<span class="glyphicon glyphicon-oil"></span>
 					</button>
-					Cargos
+					Nuevo Empleado
 				</h1>
 
 				<!-- Formularios-->
 
 				<div class="col-xs-12">
 					<p>Complete todos los campos para ingresar un empleado.</p>
-					<form class="form-horizontal" action="AltaEmpleadoServlet" id="altaEmpleadoForm">
+					<form class="col-sm-3 formulario" action="AltaEmpleadoServlet" id="altaEmpleadoForm">
 	 					 Apellido: 
-	  					<input id="apellido" type="text" name="apellido" >
+	  					<input id="apellido" type="text" name="apellido" class="form-control">
 	  					<br>
 	  					<br>
 	  					 Nombre: 
-	  					<input id="nombre" type="text" name="nombre" >
+	  					<input id="nombre" type="text" name="nombre" class="form-control">
 	  					<br>
 	  					<br>
 	  					 CUIL: 
-	  					<input id="cuil" type="text" name="cuil" >
+	  					<input id="cuil" type="text" name="cuil" class="form-control">
 	  					<br>
 	  					<br>
 						Fecha de nacimiento:
-						<input type="date" name="classDate" onselect="google.script.run.dateSelect()">
+						<input type="date" name="classDate" onselect="google.script.run.dateSelect()" class="form-control">
 						<br>
 						<br>
 	  					 DNI: 
-	  					<input id="dni" type="text" name="dni" >
+	  					<input id="dni" type="text" name="dni" class="form-control">
 	  					<br>
 	  					<br>
 	  					Antigüedad: 
-						<input id="antiguedad" type="text" name="antiguedad" >
+						<input id="antiguedad" type="text" name="antiguedad" class="form-control">
 	  					<br>
 						<br>
 	  					<div class="form-group">
-							<label for="escuela" class="col-sm-2 control-label">Escuela: </label>
+							<label for="escuela" class="control-label">Escuela: </label>
 							<select id="escuela" name="escuela" class="form-control">
 								<c:forEach var="escuela" items="${escuelas}">
 									<option>${escuela.nombre}-${escuela.nro}</option>

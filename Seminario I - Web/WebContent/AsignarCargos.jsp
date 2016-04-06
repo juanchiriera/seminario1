@@ -48,8 +48,9 @@ prefix="c" %>
 				<!-- Formularios-->
 
 				<div class="col-xs-12">
-					<form class="form-horizontal" action="AsignarCargoServletNew" id="asigarCargoForm">
-						<p>Complete todos los campos para asignar un cargo al empleado.</p>
+				<p>Complete todos los campos para asignar un cargo al empleado.</p>
+					<form class="form-horizontal col-sm-5 formulario" action="AsignarCargoServletNew" id="asigarCargoForm">
+						
 						<div class="form-group">
 							<label for="profesor" class="col-sm-2 control-label">Empleado</label>
 							<div class="col-sm-10 ">

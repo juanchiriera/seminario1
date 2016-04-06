@@ -47,7 +47,7 @@ prefix="c" %>
 
 				<div class="col-xs-12">
 					<p>Ingrese el numero de DNI del empleado del cual desea consultar los cargos.</p>
-					<form class="form-horizontal" action="CargosAsignadosServlet" id="BuscarCargosAsignadosForm">
+					<form class="col-sm-3 formulario" action="CargosAsignadosServlet" id="BuscarCargosAsignadosForm">
 	 					 DNI: 
 	  					<input id="dni" type="text" name="dni" >
 	  					<br>

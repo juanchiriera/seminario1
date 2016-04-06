@@ -47,7 +47,7 @@ prefix="c" %>
 
 				<div class="col-xs-12">
 					<p>Ingrese el numero de DNI del empleado del cual desea consultar los Descuentos.</p>
-					<form class="form-horizontal" action="DescuentoEmpleadoServlet" id="DescuentosEmpleadoForm">
+					<form class="col-sm-3 formulario" action="DescuentoEmpleadoServlet" id="DescuentosEmpleadoForm">
 	 					 DNI: 
 	  					<input id="dni" type="text" name="dni" >
 	  					<br>

@@ -47,7 +47,7 @@ prefix="c" %>
 
 				<div class="col-xs-12">
 					<p>Ingrese el numero de DNI del empleado del cual desea Modificar.</p>
-					<form class="form-horizontal" action="ModificarEmpleadoServlet" id="ModificarEmpleadoForm">
+					<form class="col-sm-3 formulario" action="ModificarEmpleadoServlet" id="ModificarEmpleadoForm">
 	 					 DNI: 
 	  					<input id="dni" type="text" name="dni" >
 	  					<br>

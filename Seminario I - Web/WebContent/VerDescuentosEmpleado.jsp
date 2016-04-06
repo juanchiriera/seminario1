@@ -42,10 +42,10 @@ prefix="c" %>
 				</h2>
 			</div>
 			
-			<p> Nombre: ${empleado.getNombre()}</p>
-			<p> Apellido: ${empleado.getApellido()}</p>
-			<p> D.N.I.: ${empleado.getDni()}</p>
-			<p> Total a descontar: ${descuento}</p>
+			<div class="modal-body"> Nombre: ${empleado.getNombre()}</div>
+			<div class="modal-body"> Apellido: ${empleado.getApellido()}</div>
+			<div class="modal-body"> D.N.I.: ${empleado.getDni()}</div>
+			<div class="modal-body"> Total a descontar: ${descuento}</div>
 			
 			
 			</div>

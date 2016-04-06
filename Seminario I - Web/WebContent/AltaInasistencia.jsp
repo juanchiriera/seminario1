@@ -4,7 +4,7 @@
 prefix="c" %>
 <% 
  if ((session.getAttribute("login") == null) || (session.getAttribute("login") == "")) {
-  response.sendRedirect("/WebSystem/index.jsp");
+  response.sendRedirect("/index.jsp");
  }
 %>
 
@@ -47,33 +47,33 @@ prefix="c" %>
 
 				<div class="col-xs-12">
 					<p>Complete todos los campos para ingresar una nueva inasistencia.</p>
-					<form class="form-horizontal" action="AltaInasistenciaServlet" id="altaInasistenciaForm">
+					<form class="col-sm-3 formulario" action="AltaInasistenciaServlet" id="altaInasistenciaForm">
 						DNI Empleado: 
-	  					<input id="dni" type="text" name="dni" >
+	  					<input id="dni" type="text" name="dni" class="form-control">
 	  					<br>
 	  					<br>
 						Código Licencia:
-						<input id="codigo" type="text" name="codigo" >
+						<input id="codigo" type="text" name="codigo" class="form-control">
 	  					<br>
 	  					<br>
 						Fecha:
-						<input id="fecha" type="date" name="classDate" onselect="google.script.run.dateSelect()">
+						<input id="fecha" type="date" name="classDate" onselect="google.script.run.dateSelect()" class="form-control">
 						<br>
 	  					<br>
 						Tiempo:
-						<input id="tiempo" type="int" name="tiempo" >
+						<input id="tiempo" type="int" name="tiempo" class="form-control">
 						<br>
 						<br>
 	  					Semanas mes corriente: 
-	  					<input id="semanas" type="int" name="semanas">
+	  					<input id="semanas" type="int" name="semanas" class="form-control">
 	 					<br>
 						<br>						
 						Horas cátedra:
-						<input id="horasCatedra" type="float" name="horasCatedra">
+						<input id="horasCatedra" type="float" name="horasCatedra" class="form-control">
 						<br>
 						<br>
 						Cantidad de clases ausente:
-						<input id="cantClasesAusente" type="int" name="cantClasesAusente">
+						<input id="cantClasesAusente" type="int" name="cantClasesAusente" class="form-control">
 						<br>
 						<br>
 	  					<div class="col-sm-offset-2 col-sm-10">

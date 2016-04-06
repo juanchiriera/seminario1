@@ -47,7 +47,7 @@ prefix="c" %>
 
 				<div class="col-xs-12">
 					<p>Ingrese el numero de DNI del empleado del cual desea consultar el Sueldo.</p>
-					<form class="form-horizontal" action="SueldoEmpleadoServlet" id="SueldoEmpleadoForm">
+					<form class="col-sm-3 formulario" action="SueldoEmpleadoServlet" id="SueldoEmpleadoForm">
 	 					 DNI: 
 	  					<input id="dni" type="text" name="dni" >
 	  					<br>

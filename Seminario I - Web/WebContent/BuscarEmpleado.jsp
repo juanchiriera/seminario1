@@ -45,35 +45,35 @@ prefix="c" %>
 
 				<!-- Formularios-->
 
-				<div class="col-xs-12">
+				<div class="col-xs-12 ">
 					<p>Complete uno o varios campos para realizar una búsqueda de empleado.</p>
-					<form class="form-horizontal" action="BuscarEmpleadoServlet" id="BuscarEmpleadoForm">
+					<form class="control-label col-sm-3 formulario" action="BuscarEmpleadoServlet" id="BuscarEmpleadoForm">
 	 					 Apellido: 
-	  					<input id="apellido" type="text" name="apellido" >
+	  					<input id="apellido" type="text" name="apellido" class="form-control">
 	  					<br>
 	  					<br>
 	  					 Nombre: 
-	  					<input id="nombre" type="text" name="nombre" >
+	  					<input id="nombre" type="text" name="nombre" class="form-control">
 	  					<br>
 	  					<br>
 	  					 CUIL: 
-	  					<input id="cuil" type="text" name="cuil" >
+	  					<input id="cuil" type="text" name="cuil" class="form-control">
 	  					<br>
 	  					<br>
 	  					 DNI: 
-	  					<input id="dni" type="text" name="dni" >
+	  					<input id="dni" type="text" name="dni"  class="form-control">
 	  					<br>
 	  					<br>
 	  					<div class="form-group">
-							<label for="estado" class="col-sm-2 control-label">Estado: </label>
-							<select>
+							<label for="estado" class="control-label">Estado: </label>
+							<select class="form-control">
  									<option id= "act" value="act">Activo</option>
  									<option id= "inact" value="inact">Inactivo</option>
 							</select>
 						</div>
 	  					<br>
 	  					<div class="form-group">
-							<label for="escuela" class="col-sm-2 control-label">Escuela: </label>
+							<label for="escuela" class="control-label">Escuela: </label>
 							<select id="escuela" name="escuela" class="form-control">
 								<c:forEach var="escuela" items="${escuelas}">
 									<option>${escuela.nombre}-${escuela.nro}</option>
@@ -82,13 +82,15 @@ prefix="c" %>
 						</div>
 						<br>
 						<br>
-						<div class="col-sm-offset-2 col-sm-10">
+						<div class="col-sm-offset-2">
 							<button  type="submit" class="btn btn-default">Buscar</button>
 						</div>
 					</form>
-						<button onclick="window.location.href='./AltaEmpleadoServletNew'" class="btn btn-default">Nuevo Empleado</button>
 					
 				</div>
+				<div class="col-sm-2">
+						<button onclick="window.location.href='./AltaEmpleadoServletNew'" class="btn btn-default ">Nuevo Empleado</button>
+					</div>
 			</div>
 		</div>
 	</div>

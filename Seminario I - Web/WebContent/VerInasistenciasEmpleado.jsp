@@ -32,9 +32,9 @@ prefix="c" %>
 			</div>
 			
 			
-			<p> Nombre: ${inasistencia.getNombre()}</p>
-			<p> Apellido: ${inasistencia.getApellido()}</p>
-			<p> D.N.I.: ${inasistencia.getDni()}</p>
+			<div class="modal-body"> Nombre: ${inasistencia.getNombre()}</div>
+			<div class="modal-body"> Apellido: ${inasistencia.getApellido()}</div>
+			<div class="modal-body"> D.N.I.: ${inasistencia.getDni()}</div>
 			
 			<div class="col-xs-12">
 				<div class="table-responsive">

@@ -47,25 +47,25 @@ prefix="c" %>
 
 				<div class="col-xs-12">
 					<p>Complete uno o varios campos para buscar a un profesor.</p>
-					<form class="form-horizontal" action="BuscarProfesorServlet" id="BuscarProfesorForm">
+					<form class="col-sm-3 formulario" action="BuscarProfesorServlet" id="BuscarProfesorForm">
 	 					 Apellido: 
-	  					<input id="apellido" type="text" name="apellido" >
+	  					<input id="apellido" type="text" name="apellido" class="form-control">
 	  					<br>
 	  					<br>
 	  					 Nombre: 
-	  					<input id="nombre" type="text" name="nombre" >
+	  					<input id="nombre" type="text" name="nombre" class="form-control">
 	  					<br>
 	  					<br>
 	  					 CUIL: 
-	  					<input id="cuil" type="text" name="cuil" >
+	  					<input id="cuil" type="text" name="cuil" class="form-control">
 	  					<br>
 	  					<br>
 	  					 DNI: 
-	  					<input id="dni" type="text" name="dni" >
+	  					<input id="dni" type="text" name="dni" class="form-control">
 	  					<br>
 	  					<br>
 	  					<div class="form-group">
-							<label for="estado" class="col-sm-2 control-label">Materia: </label>
+							<label for="estado" class="control-label">Materia: </label>
 							<select id="materia" name="materia" class="form-control">
 								<c:forEach var="materia" items="${materias}">
 									<option>${materia.toString()}</option>
@@ -75,7 +75,7 @@ prefix="c" %>
 	  					<br>
 <!-- 	  					FIJATE SI LO TRAES DE LA CLASE "clases" o si lo cargamos nosotros a mano -->
 	  						<div class="form-group">
-							<label for="estado" class="col-sm-2 control-label">Curso: </label>
+							<label for="estado" class="control-label">Curso: </label>
 							<select id="curso" name="curso" class="form-control">
 								<c:forEach var="curso" items="${cursos}">
 									<option>${curso.toString()}</option>
@@ -84,7 +84,7 @@ prefix="c" %>
 						</div>
 	  					<br>
 	  						<div class="form-group">
-							<label for="estado" class="col-sm-2 control-label">División: </label>
+							<label for="estado" class="control-label">División: </label>
 							<select id="division" name="division" class="form-control">
 								<c:forEach var="division" items="${divisiones}">
 									<option>${division.toString()}</option>
@@ -93,9 +93,9 @@ prefix="c" %>
 						</div>
 	  					<br>
 	  					<div class="form-group">
-							<label for="estado" class="col-sm-2 control-label">Estado</label>
-							<select>
- 									<option id= "act" value="act">Activo</option>
+							<label for="estado" class="control-label">Estado</label>
+							<select class="form-control">
+ 									<option id= "act" value="act" >Activo</option>
  									<option id= "inact" value="inact">Inactivo</option>
 							</select>
 						</div>
