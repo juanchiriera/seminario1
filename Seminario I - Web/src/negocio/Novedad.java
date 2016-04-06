@@ -42,17 +42,12 @@ public class Novedad {
 	private String tipo;
 	@Column
 	private String motivo;
-	@SuppressWarnings("unused")
-	@Column
-	private int dias;
 	
-	public Novedad(Date fecha/*, Clase clase*/, Licencia licencia, float oblig_hc_mes, float oblig_hc_noTrab, int semanasMesCorriente, float cantClasesAusente) {
+	public Novedad(Date fecha, Licencia licencia, float oblig_hc_mes, int semanasMesCorriente, float cantClasesAusente) {
 		super();
 		this.fecha = fecha;
-//		this.clase = clase;
 		this.licencia = licencia;
 		this.oblig_hc_mes = oblig_hc_mes;
-		this.oblig_hc_noTrab = oblig_hc_noTrab;
 		this.semanasMesCorriente = semanasMesCorriente;
 		this.cantClasesAusente = cantClasesAusente;
 	}

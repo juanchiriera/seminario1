@@ -33,9 +33,7 @@ public class AltaInasistenciaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String fecha = request.getParameter("classDate");
 		String dni = request.getParameter("dni");
-		int antiguedad = Integer.parseInt(request.getParameter("antiguedad"));
 		String codigoLicencia = request.getParameter("codigo");
-		int tiempo = Integer.parseInt(request.getParameter("tiempo"));
 		int semanas = Integer.parseInt(request.getParameter("semanas"));
 		float horasCatedra = Float.parseFloat(request.getParameter("horasCatedra"));
 		int cantClasesAusente = Integer.parseInt(request.getParameter("cantClasesAusente"));
@@ -43,10 +41,10 @@ public class AltaInasistenciaServlet extends HttpServlet {
 		int year = Integer.parseInt(dateAux[0]);
 		int month = Integer.parseInt(dateAux[1]);
 		int day = Integer.parseInt(dateAux[2]);
-		Date fechaNacimiento = new Date(year,month,day);
+		Date fechaF = new Date(year,month,day);
 		Licencia licencia = Sistema.getInstancia().buscarLicencia(codigoLicencia);
 //		TODO Ver que onda los parametros que paso
-		Sistema.getInstancia().cargarInasistenciaEmpleado(dni, fechaNacimiento, licencia, semanas, horasCatedra, tiempo, cantClasesAusente);
+		Sistema.getInstancia().cargarInasistenciaEmpleado(dni, fechaF, licencia, semanas, horasCatedra, cantClasesAusente);
 		response.sendRedirect("home.jsp");
 	}
 

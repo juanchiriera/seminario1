@@ -60,10 +60,6 @@ prefix="c" %>
 						<input id="fecha" type="date" name="classDate" onselect="google.script.run.dateSelect()" class="form-control">
 						<br>
 	  					<br>
-						Tiempo:
-						<input id="tiempo" type="int" name="tiempo" class="form-control">
-						<br>
-						<br>
 	  					Semanas mes corriente: 
 	  					<input id="semanas" type="int" name="semanas" class="form-control">
 	 					<br>
