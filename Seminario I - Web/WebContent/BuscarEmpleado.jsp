@@ -67,8 +67,8 @@ prefix="c" %>
 	  					<div class="form-group">
 							<label for="estado" class="control-label">Estado: </label>
 							<select class="form-control">
- 									<option id= "act" value="act">Activo</option>
- 									<option id= "inact" value="inact">Inactivo</option>
+ 									<option id= "true" value="act">Activo</option>
+ 									<option id= "false" value="inact">Inactivo</option>
 							</select>
 						</div>
 	  					<br>

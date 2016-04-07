@@ -42,15 +42,21 @@ public class HibernateEmpleadoDAO {
 
 	public List<Empleado> buscarEmpleados(String apellido, String nombre, String cuil, String dni, int nroEscuela,
 			boolean estado) {
+//		if(apellido != null & apellido = ' ')
+		
 		Session session = sf.openSession();
-		Query q = session.createQuery("from ConCargo e where e.dni = :dni or "
-				+ "e.apellido = :apellido or e.nombre=:nombre or e.cuil=:cuil or e.estado=:estado or e.escuela.nro=:nroEscuela");
+		Query q = session.createQuery("from ConCargo e where ((e.dni=:dni or :dni='')"
+				+ " and (e.apellido=:apellido or :apellido='')"
+				+ " and (e.nombre=:nombre or :nombre='')"
+				+ " and (e.cuil=:cuil or :cuil=''))");
+//				+ " and (e.estado=:estado or :estado='')" 
+//				+ " and (e.escuela.nro=:nroEscuela or :escuela='' )");
 		q.setParameter("dni", dni);
 		q.setParameter("apellido", apellido);
 		q.setParameter("nombre", nombre);
 		q.setParameter("cuil", cuil);
-		q.setParameter("estado", estado);
-		q.setParameter("nroEscuela", nroEscuela);
+//		q.setParameter("estado", estado);
+//		q.setParameter("nroEscuela", nroEscuela);
 		
 		List<Empleado> e = (List<Empleado>) q.list();
 		session.close();
