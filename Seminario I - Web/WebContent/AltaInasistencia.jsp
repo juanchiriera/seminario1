@@ -10,20 +10,20 @@ prefix="c" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
-<head>
+<head> 	
 	<%@ include file="/head.html" %>
 	<script>
-	$(function() {
-		$('.selectpicker').selectpicker({
-			style: 'btn-info',
-			 size: 4
-		});
+// 	$(function() {
+// 		$('.selectpicker').selectpicker({
+// 			style: 'btn-info',
+// 			 size: 4
+// 		});
 		
-        $('#fecha').datetimepicker({
-            daysOfWeekDisabled: [0, 6],
-            format: 'DD/MM/YYYY'
-        });
-	});
+//         $('#fecha').datetimepicker({
+//             daysOfWeekDisabled: [0, 6],
+//             format: 'DD/MM/YYYY'
+//         });
+// 	});
 	</script>
 </head>
 
@@ -48,12 +48,22 @@ prefix="c" %>
 				<div class="col-xs-12">
 					<p>Complete todos los campos para ingresar una nueva inasistencia.</p>
 					<form class="col-sm-3 formulario" action="AltaInasistenciaServlet" id="altaInasistenciaForm">
-						DNI Empleado: 
-	  					<input id="dni" type="text" name="dni" class="form-control">
-	  					<br>
-	  					<br>
-						Código Licencia:
-						<input id="codigo" type="text" name="codigo" class="form-control">
+						Empleado: 
+	  					<select id="dni" name="dni" class="form-control">
+									<c:forEach var="empleado" items="${empleados}">
+										<option value="${empleado.dni}">${empleado.nombre} ${empleado.apellido}</option>
+									</c:forEach>
+
+						</select>
+						<br>
+						<br>
+						Licencia:
+						<select id="licencia" name="licencia" class="form-control">
+									<c:forEach var="licencia" items="${licencias}">
+										<option value="${licencia.codigo}">${licencia.tipo} - ${licencia.motivo}</option>
+									</c:forEach>
+
+						</select>
 	  					<br>
 	  					<br>
 						Fecha:

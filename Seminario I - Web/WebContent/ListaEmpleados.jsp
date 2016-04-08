@@ -47,8 +47,8 @@
 						</thead>
 
 
-						<c:forEach var="empleado" items="${empleados}">
-							<tr>
+						<c:forEach var="empleado" items="${empleados}" >
+							<tr id="${empleado.getDni()}" class="fila" style='cursor:pointer' onclick="seleccionarFila(id, ${empleado.getDni()});">
 								<td>${empleado.getApellido()}</td>
 								<td>${empleado.getNombre()}</td>
 								<td>${empleado.getDni()}</td>
@@ -59,9 +59,32 @@
 								<td>${empleado.getEstado()}</td>
 							</tr>
 						</c:forEach>
+
 					</table>
 
-
+<!-- 					<script type="text/javascript"> -->
+<!-- // 					function seleccionarFila(fila, dni){ -->
+<!-- // 						if(document.getElementById(fila).className == "filaSeleccionada"){ -->
+<!-- // 							document.getElementById(fila).className = "fila"; -->
+<!-- // 						}else{ -->
+<!-- // 							document.getElementById(fila).className = "filaSeleccionada"; -->
+<!-- // 						} -->
+						
+<!-- // 					} -->
+<!-- // 					var valores[8]; -->
+<!-- // 					var i=0; -->
+<!-- // 						$(".fila").click(function() { -->
+<!-- // 							// recorremos todos los valores... -->
+<!-- // 							$(".tabla tr").each(function(index){ -->
+<!-- // 								$(".fila").className="fila"; -->
+<!-- // 							}) -->
+<!-- // 							$(".fila td").each(function(index) { -->
+<!-- // 								valores[i]=$(this).text(); -->
+<!-- // 								i++; -->
+<!-- // 							}); -->
+<!-- // 						}); -->
+<!-- // 					i=0; -->
+<!-- 					</script> -->
 
 				</div>
 			</div>
@@ -69,7 +92,7 @@
 		</div>
 	</div>
 
-	
+
 </body>
 
 

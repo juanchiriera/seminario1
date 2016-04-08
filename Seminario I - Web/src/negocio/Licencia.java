@@ -24,6 +24,9 @@ public class Licencia {
 	@Column
 	private boolean certificado; //si tiene o no certificado, ejemplo dia de examen
 	
+	public Licencia(){		
+	}
+	
 	public Licencia(String codigo, String tipo, String motivo, float haberes, int tiempo,
 			int antiguedadRequerida, boolean certificado) {
 		super();

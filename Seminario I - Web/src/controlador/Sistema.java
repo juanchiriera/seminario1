@@ -1,7 +1,9 @@
 package controlador;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Vector;
 
@@ -465,26 +467,22 @@ public class Sistema {
 	}
 
 	// Para buscar un solo Cargo
-	public Cargo buscarCargo(String nombreCargo) {
-		Cargo cargo = CargoSRV.buscarCargo(nombreCargo);
-		// for(Cargo cargo : cargos){
-		// if(cargo.sosCargo(nombreCargo))
-		// return cargo;
-		// }
+	public Cargo buscarCargo(int idCargo) {
+		Cargo cargo = CargoSRV.buscarCargo(idCargo);
 		return cargo;
 	}
 
 	public void modificarCargo(int idCargo, String nombre, float sueldoBasico, int horasTrabajo) {
-		Cargo cargo = buscarCargo(nombre);
-		if (cargo != null) {
-			cargo.setIdCargo(idCargo);
-			cargo.setNombre(nombre);
-			cargo.setSueldoBasico(sueldoBasico);
-			cargo.setHoras(horasTrabajo);
-			CargoSRV.guardarCargo(cargo);
-		} else {
-			/** TODO El codigo no corresponde a un cargo existente **/
-		}
+//		Cargo cargo = buscarCargo(nombre);
+//		if (cargo != null) {
+//			cargo.setIdCargo(idCargo);
+//			cargo.setNombre(nombre);
+//			cargo.setSueldoBasico(sueldoBasico);
+//			cargo.setHoras(horasTrabajo);
+//			CargoSRV.guardarCargo(cargo);
+//		} else {
+//			/** TODO El codigo no corresponde a un cargo existente **/
+//		}
 	}
 
 	public List<Cargo> recuperarCargos() {
@@ -492,7 +490,7 @@ public class Sistema {
 	}
 
 	public void altaCargo(String nombreCargo, float sueldoBasico, int horasTrabajo) {
-		Cargo cargo = buscarCargo(nombreCargo);
+		Cargo cargo = buscarCargoPorNombre(nombreCargo);
 		if (cargo == null) {
 			cargo = new Cargo(nombreCargo, sueldoBasico, horasTrabajo, true);
 			CargoSRV.guardarCargo(cargo);
@@ -501,12 +499,17 @@ public class Sistema {
 		}
 	}
 
+	private Cargo buscarCargoPorNombre(String nombreCargo) {
+		Cargo cargo = CargoSRV.buscarCargoPorNombre(nombreCargo);
+		return cargo;
+	}
+
 	// Baja lógica
-	public void elminarCargo(String nombreCargo) {
-		Cargo cargo = buscarCargo(nombreCargo);
+	public void elminarCargo(int idCargo) {
+		Cargo cargo = buscarCargo(idCargo);
 		if (cargo != null || cargo.isEstado() == true) {
 			cargo.setEstado(false);
-			CargoSRV.guardarCargo(cargo);
+			CargoSRV.actualizarCargo(cargo);
 		} else {
 			/**
 			 * TODO No existe ningun cargo con ese id o se encuentra inactivo
@@ -722,6 +725,7 @@ public class Sistema {
 		/**
 		 * TODO Se debe crear una nueva novedad y cargar el o los días faltados
 		 */
+		semanasMesCorriente = cantidadSemandasMes(fecha.getMonth());
 		Empleado emp = buscarEmpleado(dni);
 		if (emp != null) {
 			Novedad novedad = new Novedad(fecha, licencia, oblig_hc_mes, semanasMesCorriente, cantClasesAusente);
@@ -753,6 +757,24 @@ public class Sistema {
 
 	public List<Empleado> recuperarEmpleados() {
 		return EmpleadoSRV.recuperarEmpleados();
+	}
+
+	public int cantidadSemandasMes(int mes) {
+		
+		Calendar cal = GregorianCalendar.getInstance();
+		cal.set(Calendar.DAY_OF_MONTH, 1);
+		cal.set(Calendar.MONTH, mes);
+		int cuenta = 0;
+		while (cal.get(Calendar.MONTH) == mes) {
+			if (cal.get(Calendar.DAY_OF_WEEK) == 1)
+				cuenta++;
+			cal.add(Calendar.DAY_OF_MONTH, 1);
+		}
+		return cuenta;
+	}
+
+	public List<Licencia> recuperarLicencias() {
+		return LicenciaSRV.recuperarLicencias();
 	}
 
 }

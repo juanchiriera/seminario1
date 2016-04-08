@@ -39,6 +39,15 @@ public class HibernateCargoDAO {
 		session.close();
 		return c;
 	}
+
+	public Cargo getCargo(int idCargo) {
+		Session session = sf.openSession();
+		Query q = session.createQuery("from Cargo c where c.idCargo = :idCargo");
+		q.setParameter("idCargo", idCargo);
+		Cargo cargo = (Cargo)q.uniqueResult();
+		session.close();
+		return cargo;
+	}
 	
 	
 }

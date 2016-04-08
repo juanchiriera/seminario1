@@ -1,8 +1,13 @@
 package dao;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.classic.Session;
 
 import hbt.HibernateUtil;
+import negocio.Licencia;
 
 public class HibernateLicenciaDAO {
 	private static HibernateLicenciaDAO instancia = null;
@@ -14,6 +19,14 @@ public class HibernateLicenciaDAO {
 			instancia = new HibernateLicenciaDAO();
 		}
 		return instancia;
+	}
+
+	public List<Licencia> recuperarLicencias() {
+		Session session = sf.openSession();
+		Query q = session.createQuery("from Licencia");
+		List<Licencia> l = (List<Licencia>) q.list();
+		session.close();
+		return l;
 	}
 	
 	

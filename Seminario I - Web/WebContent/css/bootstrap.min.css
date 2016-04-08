@@ -6549,6 +6549,10 @@ button.close {
 	line-height: 1.42857143
 }
 
+.filaSeleccionada{
+	background-color: steelblue;
+}
+
 .modal-body {
 	position: relative;
 	padding: 15px;

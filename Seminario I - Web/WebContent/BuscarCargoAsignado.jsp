@@ -47,15 +47,26 @@ prefix="c" %>
 
 				<div class="col-xs-12">
 					<p>Ingrese el numero de DNI del empleado del cual desea consultar los cargos.</p>
-					<form class="col-sm-3 formulario" action="CargosAsignadosServlet" id="BuscarCargosAsignadosForm">
+					<form class="col-sm-3 formulario" action="CargosAsignadosServlet" id="BuscarCargosAsignadosForm" name="formulario">
 	 					 DNI: 
 	  					<input id="dni" type="text" name="dni" >
 	  					<br>
 	  					<br>
 						<div class="col-sm-offset-2 col-sm-10">
-							<button  type="submit" class="btn btn-default">Buscar</button>
+							<button  onclick="validarCampo();" type="button" class="btn btn-default" >Buscar</button>
 						</div>
 					</form>
+					<script type="text/javascript">
+					function validarCampo(){
+						if(document.formulario.dni.value.length==0){
+							alert("Debe escribir un DNI");
+							document.formulario.dni.focus();
+							return;
+						}else{
+							document.formulario.submit();
+						}
+					}
+					</script>
 					<button onclick="window.location.href='./AsignarCargosServlet'" class="btn btn-default">Asignar Cargos</button>
 				</div>
 			</div>

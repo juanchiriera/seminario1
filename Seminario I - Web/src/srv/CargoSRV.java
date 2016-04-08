@@ -16,9 +16,8 @@ public class CargoSRV {
 		// TODO Implementar busqueda
 		return null;
 	}
-	public static Cargo buscarCargo(String nombreCargo) {
-		// TODO Implementar busqueda
-		return null;
+	public static Cargo buscarCargo(int idCargo) {
+		return HibernateCargoDAO.getInstancia().getCargo(idCargo);
 	}
 	public static void guardarCargo(Cargo cargo) {
 		// TODO Implementar guardar
@@ -29,5 +28,13 @@ public class CargoSRV {
 	}
 	public static Collection<Cargo> recuperarCargosEmpleado(String dni) {
 		return HibernateCargoDAO.getInstancia().getCargasEmpleado(dni);
+	}
+	public static Cargo buscarCargoPorNombre(String nombreCargo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public static void actualizarCargo(Cargo cargo) {
+		// TODO Auto-generated method stub
+		
 	}
 }

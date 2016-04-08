@@ -1,5 +1,6 @@
 package srv;
 
+import java.util.List;
 import java.util.Vector;
 
 import dao.HibernateLicenciaDAO;
@@ -29,5 +30,9 @@ public class LicenciaSRV {
 	public static void eliminarLicencia(Licencia lic) {
 		// TODO Implementar eliminar
 		
+	}
+
+	public static List<Licencia> recuperarLicencias() {
+		return dao.getInstancia().recuperarLicencias();
 	}
 }
