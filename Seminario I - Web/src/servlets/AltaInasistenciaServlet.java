@@ -33,7 +33,7 @@ public class AltaInasistenciaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String fecha = request.getParameter("classDate");
 		String dni = request.getParameter("dni");
-		String codigoLicencia = request.getParameter("licencia");
+		int codigoLicencia =Integer.parseInt(request.getParameter("licencia"));
 		float horasCatedra = Float.parseFloat(request.getParameter("horasCatedra"));
 		int cantClasesAusente = Integer.parseInt(request.getParameter("cantClasesAusente"));
 		String [] dateAux = fecha.split("-");

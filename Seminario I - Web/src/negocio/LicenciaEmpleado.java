@@ -31,7 +31,7 @@ public class LicenciaEmpleado {
 	}
 	
 	
-	public boolean sosLicencia(String codigo, String tipo, String motivo){
+	public boolean sosLicencia(int codigo, String tipo, String motivo){
 		return this.licencia.hayLicencias(codigo, tipo, motivo);
 	}
 

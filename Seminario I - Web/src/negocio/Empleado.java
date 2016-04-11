@@ -201,9 +201,9 @@ public abstract class Empleado {
 		this.licenciasEmpleados = licenciasEmpleados;
 	}
 
-	public LicenciaEmpleado getLicencia(String codigo) {
+	public LicenciaEmpleado getLicencia(int codigo) {
 		for (LicenciaEmpleado licenciaEmpleado : licenciasEmpleados) {
-			if(licenciaEmpleado.getLicencia().getCodigo().equals(codigo))
+			if(licenciaEmpleado.getLicencia().getCodigo()==codigo)
 				return licenciaEmpleado;
 		}
 		return null;

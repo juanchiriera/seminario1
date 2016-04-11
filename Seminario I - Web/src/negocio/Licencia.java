@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Table(name="licencias")
 public class Licencia {
 	@Id
-	private String codigo; //le agregue este, numero cada posible licencia para que sea mas sencillo el obtenerDescuento()
+	private int codigo; //le agregue este, numero cada posible licencia para que sea mas sencillo el obtenerDescuento()
 	@Column
 	private String tipo;
 	@Column
@@ -27,7 +27,7 @@ public class Licencia {
 	public Licencia(){		
 	}
 	
-	public Licencia(String codigo, String tipo, String motivo, float haberes, int tiempo,
+	public Licencia(int codigo, String tipo, String motivo, float haberes, int tiempo,
 			int antiguedadRequerida, boolean certificado) {
 		super();
 		this.codigo = codigo;
@@ -40,11 +40,11 @@ public class Licencia {
 	}
 	
 	
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 
@@ -96,16 +96,16 @@ public class Licencia {
 		this.certificado = certificado;
 	}
 
-	public boolean hayLicencias(String codigo, String tipo, String motivo){
-		if (this.tipo.equalsIgnoreCase(tipo) || this.codigo.equals(codigo) || this.motivo.equalsIgnoreCase(motivo)){
+	public boolean hayLicencias(int codigo, String tipo, String motivo){
+		if (this.tipo.equalsIgnoreCase(tipo) || this.codigo==codigo || this.motivo.equalsIgnoreCase(motivo)){
 			return true;
 		}
 		return false;
 	}
 	
 
-	public boolean sosLicencia(String codigo) {
-		return (this.codigo.equals(codigo));
+	public boolean sosLicencia(int codigo) {
+		return (this.codigo==codigo);
 	}
 
 	public boolean getCertificado() {

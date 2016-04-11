@@ -329,7 +329,7 @@ public class Sistema {
 	}
 
 	// Para buscar una sola licencia
-	public Licencia buscarLicencia(String codigo) {
+	public Licencia buscarLicencia(int codigo) {
 		Licencia licencia = LicenciaSRV.buscarLicencia(codigo);
 		// for(Licencia licencia : licencias){
 		// if(licencia.sosLicencia(codigo))
@@ -338,7 +338,7 @@ public class Sistema {
 		return licencia;
 	}
 
-	public void modificarLicencia(String codigo, String tipo, String motivo, float haberes, int tiempo,
+	public void modificarLicencia(int codigo, String tipo, String motivo, float haberes, int tiempo,
 			int antiguedadRequerida, boolean certificado) {
 		/**
 		 * TODO Había pensado un do while para que se ejecute y si alguno es
@@ -361,7 +361,7 @@ public class Sistema {
 	}
 
 	// No tendría que ser una baja logica?? yo segui lo que decia las pantallas
-	public void eliminarLicencia(String codigo, String tipo, String motivo) {
+	public void eliminarLicencia(int codigo, String tipo, String motivo) {
 		Licencia lic = buscarLicencia(codigo);
 		if (lic != null) {
 			lic = null;
@@ -369,7 +369,7 @@ public class Sistema {
 		}
 	}
 
-	public void altaLicencia(String codigo, String tipo, String motivo, float haberes, int tiempo,
+	public void altaLicencia(int codigo, String tipo, String motivo, float haberes, int tiempo,
 			int antiguedadRequerida, boolean certificado) {
 		Licencia lic = buscarLicencia(codigo);
 		if (lic == null) {
@@ -605,7 +605,7 @@ public class Sistema {
 		
 	}
 	
-	public void cargarLicenciaEmpleado(String dni, String codigo, String tipo, String motivo, float haberes,
+	public void cargarLicenciaEmpleado(String dni, int codigo, String tipo, String motivo, float haberes,
 			int antiguedadRequerida, boolean certificado, int semanasMesCorriente, float oblig_hc_mes,
 			float oblig_hc_noTrab, int diasAusente) {
 		Empleado emp = buscarEmpleado(dni);
@@ -618,18 +618,18 @@ public class Sistema {
 			Date fecha = new Date();
 			for (Licencia licencia : licencias) {
 				// Busco entre las licencias existentes
-				if (codigo.equals(licencia.getCodigo())) {
+				if (codigo==licencia.getCodigo()) {
 					for (LicenciaEmpleado licEmp : licenciasEmpleado) {
 						// Me fijo si el empleado ya tiene registro de esa
 						// licencia, si tiene chequeo si le quedan dias
 						// disponibles
-						if (codigo.equals(licEmp.getLicencia().getCodigo())) {
+						if (codigo==licEmp.getLicencia().getCodigo()) {
 							// chequeo si le quedan dias disponibles
 							if (licEmp.getCantDisponible() >= diasAusente) {
 								// TODO Aca no se actualiza la novedad, se crea
 								// una nueva y se le agrega la licencia
 								for (Novedad novedad : emp.getNovedades()) {
-									if (codigo.equals(novedad.getLicencia().getCodigo())) {
+									if (codigo==novedad.getLicencia().getCodigo()) {
 										novedad.setFecha(fecha);
 										novedad.setLicencia(licencia);
 										// Seteo la clase?? Yo la volaría de
@@ -667,7 +667,7 @@ public class Sistema {
 								if (certificado == true)
 									licEmp.getLicencia().setCertificado(certificado);
 								for (Novedad novedad : emp.getNovedades()) {
-									if (codigo.equals(novedad.getLicencia().getCodigo())) {
+									if (codigo==novedad.getLicencia().getCodigo()) {
 										novedad.setFecha(fecha);
 										novedad.setLicencia(licencia);
 										// Incremento cantClasesAusente en los
