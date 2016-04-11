@@ -39,7 +39,13 @@ public class ModificarEmpleadoServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		String dni = request.getParameter("dni");
+		String nombre = request.getParameter("nombre");
+		String apellido = request.getParameter("apellido");
+		Empleado empleado = Sistema.getInstancia().buscarEmpleado(dni);
+		int antiguedad = Integer.parseInt(request.getParameter("antiguedad"));
+		Sistema.getInstancia().modificarEmpleado(nombre, apellido, dni, empleado.getCuil(), empleado.getFechaDeNacimiento(), antiguedad, empleado.getEscuela().getNro(), empleado.getEstado());
+		response.sendRedirect("home.jsp");
 	}
 
 }

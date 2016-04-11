@@ -62,9 +62,8 @@ public class ConCargo extends Empleado {
 		return basico + porAntiguedad + porZona;
 	}
 	
-	@SuppressWarnings({ "deprecation", "null" })
 	public SueldoV vistaSueldoEmpleado (int mes) {
-		SueldoV detalleSueldo = null;
+		SueldoV detalleSueldo = new SueldoV();
 		detalleSueldo.setMes(mes);
 		detalleSueldo.setApellido(this.apellido);
 		detalleSueldo.setNombre(this.nombre);

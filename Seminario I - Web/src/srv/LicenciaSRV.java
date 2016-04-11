@@ -18,8 +18,7 @@ public class LicenciaSRV {
 	}
 
 	public static Licencia buscarLicencia(String codigo) {
-		// TODO Implementar Busqueda
-		return null;
+		return HibernateLicenciaDAO.getInstancia().buscarLicencia(codigo);
 	}
 
 	public static void guardarLicencia(Licencia lic) {

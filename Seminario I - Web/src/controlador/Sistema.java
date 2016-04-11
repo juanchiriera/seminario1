@@ -161,22 +161,8 @@ public class Sistema {
 		if (flag == true) {
 			empleado.getCargos().add(cargo);
 		}
-		// for(ConCargo emp : conCargos){
-		// boolean flag = false;
-		// if(emp.getDni().equals(dni)){
-		// for(Cargo cargoAux : emp.getCargos()){
-		// if(cargoAux.getIdCargo()==cargo.getIdCargo()){
-		// flag = true;
-		// }
-		// }
-		// }
-		// if(flag == true){
-		// emp.getCargos().add(cargo);
-		// if(emp.isEstado() == false)
-		// emp.setEstado(true);
-		// }
-		//
-		// }
+		EmpleadoSRV.actualizarEmpleado(empleado);
+		
 	}
 
 	public void altaEmpleado(String nombre, String apellido, String dni, String cuil, Date fechaDeNacimiento,
@@ -228,7 +214,7 @@ public class Sistema {
 			// ver de agregar el nombre correspondiente al numero de escuela
 			empleado.getEscuela().setNro(nroEscuela);
 			empleado.setEstado(estado);
-			EmpleadoSRV.grabarEmpleado(empleado);
+			EmpleadoSRV.actualizarEmpleado(empleado);
 		}
 	}
 
@@ -259,16 +245,16 @@ public class Sistema {
 		ConCargo empleadoC = EmpleadoSRV.buscarEmpleadoConCargo(dni);
 		float sueldoTotal = 0;
 		if (empleadoS != null) {
-			SueldoV detalleSueldo = empleadoS.vistaSueldoEmpleado(
-					mes); /**
+//			SueldoV detalleSueldo = empleadoS.vistaSueldoEmpleado(mes); 
+			/**
 							 * TODO Esto esta bien? Se hace acá el para mostrar?
 							 **/
 			sueldoTotal = empleadoS.calcularSueldo();
 			return sueldoTotal;
 		}
 		if (empleadoC != null) {
-			SueldoV detalleSueldo = empleadoC.vistaSueldoEmpleado(
-					mes); /**
+//			SueldoV detalleSueldo = empleadoC.vistaSueldoEmpleado(mes); 
+			/**
 							 * TODO Esto esta bien? Se hace acá el para mostrar?
 							 **/
 			sueldoTotal = empleadoC.calcularSueldo();
@@ -281,11 +267,9 @@ public class Sistema {
 		Empleado emp = buscarEmpleado(dni);
 		float descuento = 0;
 		if (emp != null) {
-			for (Novedad novedad : emp.getNovedades()) {
-				if (novedad.getFecha().getMonth() == fechaActual.getMonth()) // como
-																				// carajo
-																				// hago
-																				// esto!?
+			 List<Novedad> novedadesEmpleado = emp.getNovedades();
+			for (Novedad novedad : novedadesEmpleado ) {
+				if (novedad.getFecha().getMonth() == fechaActual.getMonth()) 
 					descuento += novedad.obtenerDescuentoTotal();
 			}
 			// DescuentoV detalleDescuento = emp.vistaDescuento(mes);
@@ -582,10 +566,50 @@ public class Sistema {
 
 	// Se concidera Licencia siempre y cuando sea justificable (Ver tabla de
 	// licencias)
+	public void cargarInasistenciaEmpleado2(String dni, Date fecha, Licencia licencia,
+			float oblig_hc_mes, int cantClasesAusente){
+		int semanasMesCorriente = cantidadSemandasMes(fecha.getMonth());
+		Empleado empleado = buscarEmpleado(dni);
+		if (empleado != null) {
+			LicenciaEmpleado licenciaEmpleado = empleado.getLicencia(licencia.getCodigo());
+			Novedad novedadPorLicencia;
+			if(licenciaEmpleado!=null){
+				int diasRestantes = licenciaEmpleado.getCantDisponible();
+				if(diasRestantes-cantClasesAusente<0){
+					novedadPorLicencia = new Novedad(fecha,licencia,oblig_hc_mes,semanasMesCorriente,cantClasesAusente - diasRestantes);
+					licenciaEmpleado.setCantDisponible(0);
+					
+				}else{
+					novedadPorLicencia = new Novedad(fecha,licencia,oblig_hc_mes,semanasMesCorriente,0);
+					licenciaEmpleado.setCantDisponible(diasRestantes - cantClasesAusente);
+				}
+			}else{
+				if(empleado.getAntiguedad()>licencia.getAntiguedadRequerida()){
+					licenciaEmpleado = new LicenciaEmpleado(licencia.getTiempo(), licencia);
+					empleado.agregarLicenciaEmpleado(licenciaEmpleado);
+					if(cantClasesAusente>licenciaEmpleado.getCantDisponible()){
+						novedadPorLicencia = new Novedad(fecha,licencia,oblig_hc_mes,semanasMesCorriente,cantClasesAusente - licenciaEmpleado.getCantDisponible());
+						licenciaEmpleado.setCantDisponible(0);
+					}else{
+						novedadPorLicencia = new Novedad(fecha,licencia,oblig_hc_mes,semanasMesCorriente,0);
+						licenciaEmpleado.setCantDisponible(licenciaEmpleado.getCantDisponible() - cantClasesAusente);
+					}
+				}else{
+					licenciaEmpleado = new LicenciaEmpleado(0, licencia);
+					novedadPorLicencia = new Novedad(fecha,licencia,oblig_hc_mes,semanasMesCorriente,cantClasesAusente);
+				}
+			}
+			empleado.agregarNovedad(novedadPorLicencia);
+			EmpleadoSRV.actualizarEmpleado(empleado);
+		}
+		
+	}
+	
 	public void cargarLicenciaEmpleado(String dni, String codigo, String tipo, String motivo, float haberes,
 			int antiguedadRequerida, boolean certificado, int semanasMesCorriente, float oblig_hc_mes,
 			float oblig_hc_noTrab, int diasAusente) {
 		Empleado emp = buscarEmpleado(dni);
+		
 		/**
 		 * TODO Hay que guardar las modificaciones que se hacan en este metodo
 		 * en la BD
@@ -720,15 +744,16 @@ public class Sistema {
 
 	// Se considera Inasistencia cuando no es justificable y hay que efectuar el
 	// descuento correspondiente (el descuento se efectúa en calcularSueldo() )
-	public void cargarInasistenciaEmpleado(String dni, Date fecha, Licencia licencia, int semanasMesCorriente,
+	public void cargarInasistenciaEmpleado(String dni, Date fecha, Licencia licencia,
 			float oblig_hc_mes, int cantClasesAusente) {
 		/**
 		 * TODO Se debe crear una nueva novedad y cargar el o los días faltados
 		 */
-		semanasMesCorriente = cantidadSemandasMes(fecha.getMonth());
+		int semanasMesCorriente = cantidadSemandasMes(fecha.getMonth());
 		Empleado emp = buscarEmpleado(dni);
 		if (emp != null) {
 			Novedad novedad = new Novedad(fecha, licencia, oblig_hc_mes, semanasMesCorriente, cantClasesAusente);
+			cargarLicenciaEmpleado(dni, licencia.getCodigo(), licencia.getTipo(), licencia.getMotivo(), licencia.getHaberes(), licencia.getAntiguedadRequerida(), licencia.getCertificado(), semanasMesCorriente, oblig_hc_mes, novedad.getOblig_hc_noTrab(), cantClasesAusente);
 			emp.getNovedades().add(novedad);
 			EmpleadoSRV.actualizarEmpleado(emp);
 		} else {

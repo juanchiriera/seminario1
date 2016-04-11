@@ -34,7 +34,6 @@ prefix="c" %>
 			<p> Nombre: ${empleado.getNombre()}</p>
 			<p> Apellido: ${empleado.getApellido()}</p>
 			<p> D.N.I.: ${empleado.getDni()}</p>
-			<p> Total a descontar: ${descuento}</p>
 			
 			
 			</div>

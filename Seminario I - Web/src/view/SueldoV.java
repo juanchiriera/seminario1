@@ -29,6 +29,10 @@ public class SueldoV {
 		this.sueldoTotal = sueldoTotal;
 	}
 
+	public SueldoV() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getMes() {
 		return mes;
 	}

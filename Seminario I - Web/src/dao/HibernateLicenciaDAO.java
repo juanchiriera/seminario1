@@ -28,6 +28,15 @@ public class HibernateLicenciaDAO {
 		session.close();
 		return l;
 	}
+
+	public Licencia buscarLicencia(String codigo) {
+		Session session = sf.openSession();
+		Query q = session.createQuery("from Licencia l where l.codigo=:codigo");
+		q.setParameter("codigo", codigo);
+		Licencia l = (Licencia) q.uniqueResult();
+		session.close();
+		return l;
+	}
 	
 	
 }

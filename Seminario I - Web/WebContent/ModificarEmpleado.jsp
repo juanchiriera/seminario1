@@ -27,8 +27,8 @@
 					de Empleado</h1>
 			</div>
 			<form method="post" action="ModificarEmpleadoServlet">
-				DNI: 
-				<input type="text" id="dni" name="dni" value="${empleado.getDni()}"	disabled="disabled"></input> 
+				<b>DNI: ${empleado.getDni()}</b> 
+				<input type="text" id="dni" name="dni" style="visibility: hidden;" value="${empleado.getDni()}">
 				<br><br>
 				Nombre: 
 				<input type="text" id="nombre" name="nombre" value="${empleado.getNombre()}" ></input>
@@ -36,20 +36,11 @@
 				Apellido: 
 				<input type="text" id="apellido" name="apellido" value="${empleado.getApellido()}"></input>
 				<br><br>
-				<div class="form-group">
-					<label for="estado" class="col-sm-2 control-label">Estado:
-					</label> <select id="estado" value="${empleado.getApellido()}">
-						<option id="act" value="act">Activo</option>
-						<option id="inact" value="inact">Inactivo</option>
-					</select>
-				</div>
+				Antiguedad: 
+				<input type="text" id="antiguedad" name="antiguedad" value="${empleado.getAntiguedad()}"></input>
+				<br><br>
 				<button type="submit" class="btn btn-default">Confirmar</button>
 			</form>
-
-			<p>Nombre: ${empleado.getNombre()}</p>
-			<p>Apellido: ${empleado.getApellido()}</p>
-			<p>D.N.I.: ${empleado.getDni()}</p>
-			<p>Total a descontar: ${descuento}</p>
 
 
 		</div>

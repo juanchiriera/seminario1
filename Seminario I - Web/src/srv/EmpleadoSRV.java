@@ -31,13 +31,11 @@ public class EmpleadoSRV {
 		
 	}
 	public static SinCargo buscarEmpleadoSinCargo(String dni) {
-		// TODO Implementar Busqueda
-		return null;
+		return HibernateEmpleadoDAO.getInstancia().buscarEmpleadoSinCargo(dni);
 	}
 	
 	public static ConCargo buscarEmpleadoConCargo (String dni){
-		// TODO Implementar Busqueda
-		return null;
+		return HibernateEmpleadoDAO.getInstancia().buscarEmpleadoConCargo(dni);
 	}
 	public static List<Empleado> buscarEmpleados(String apellido, String nombre, String cuil, String dni, int nroEscuela,
 			boolean estado) {

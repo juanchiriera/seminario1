@@ -50,6 +50,11 @@ public class Novedad {
 		this.oblig_hc_mes = oblig_hc_mes;
 		this.semanasMesCorriente = semanasMesCorriente;
 		this.cantClasesAusente = cantClasesAusente;
+		setOblig_hc_noTrab();
+	}
+	
+	public Novedad(){
+		
 	}
 
 	public Date getFecha() {
@@ -88,7 +93,7 @@ public class Novedad {
 		return oblig_hc_noTrab;
 	}
 	
-	public void setOblig_hc_noTrab(float oblig_hc_noTrab) {
+	public void setOblig_hc_noTrab() {
 		//Segun lo aclarado arriba
 		this.oblig_hc_noTrab = (this.oblig_hc_mes / this.semanasMesCorriente) * this.cantClasesAusente;
 	}

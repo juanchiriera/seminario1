@@ -22,6 +22,7 @@ public class LicenciaEmpleado {
 	@JoinColumn(referencedColumnName="codigo", name="codigoLicencia")
 	private Licencia licencia;
 	
+	public LicenciaEmpleado(){}
 	
 	public LicenciaEmpleado(int cantDisponible, Licencia licencia) {
 		super();

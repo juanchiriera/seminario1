@@ -23,6 +23,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import srv.NovedadSRV;
+
 
 
 
@@ -150,8 +152,8 @@ public abstract class Empleado {
 		return this.estado;
 	}
 	
-	public Collection<Novedad> getNovedades() {
-		return novedades;
+	public List<Novedad> getNovedades() {
+		return NovedadSRV.recuperarNovedadesEmpleado(dni);
 	}
 
 	public void setNovedades(Collection<Novedad> novedades) {
@@ -197,6 +199,22 @@ public abstract class Empleado {
 
 	public void setLicenciasEmpleados(Collection<LicenciaEmpleado> licenciasEmpleados) {
 		this.licenciasEmpleados = licenciasEmpleados;
+	}
+
+	public LicenciaEmpleado getLicencia(String codigo) {
+		for (LicenciaEmpleado licenciaEmpleado : licenciasEmpleados) {
+			if(licenciaEmpleado.getLicencia().getCodigo().equals(codigo))
+				return licenciaEmpleado;
+		}
+		return null;
+	}
+
+	public void agregarLicenciaEmpleado(LicenciaEmpleado licenciaEmpleado) {
+		licenciasEmpleados.add(licenciaEmpleado);
+	}
+
+	public void agregarNovedad(Novedad novedad) {
+		novedades.add(novedad);
 	}
 
 	

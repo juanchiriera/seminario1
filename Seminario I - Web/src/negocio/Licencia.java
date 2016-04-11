@@ -107,4 +107,8 @@ public class Licencia {
 	public boolean sosLicencia(String codigo) {
 		return (this.codigo.equals(codigo));
 	}
+
+	public boolean getCertificado() {
+		return this.certificado;
+	}
 }

@@ -8,7 +8,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 
 import hbt.HibernateUtil;
+import negocio.ConCargo;
 import negocio.Empleado;
+import negocio.SinCargo;
 
 public class HibernateEmpleadoDAO {
 	private static HibernateEmpleadoDAO instancia = null;
@@ -99,6 +101,20 @@ public class HibernateEmpleadoDAO {
 		session.getTransaction().commit();
 		session.close();
 	}
+
+	public ConCargo buscarEmpleadoConCargo(String dni) {
+		Session session = sf.openSession();
+		Query q = session.createQuery("from ConCargo c where c.dni=:dni");
+		q.setParameter("dni", dni);
+		ConCargo empleado = (ConCargo) q.uniqueResult();
+		return empleado;
+	}
 	
-	
+	public SinCargo buscarEmpleadoSinCargo(String dni) {
+		Session session = sf.openSession();
+		Query q = session.createQuery("from SinCargo c where c.dni=:dni");
+		q.setParameter("dni", dni);
+		SinCargo empleado = (SinCargo) q.uniqueResult();
+		return empleado;
+	}
 }
