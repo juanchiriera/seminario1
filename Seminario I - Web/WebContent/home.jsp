@@ -22,16 +22,19 @@ prefix="c" %>
 <body>
   <%@ include file="/nav.html" %>
   
-  <div class="container-fluid">
-		<div class="row">
-			<div class="2 main">
-				<div></div>
-				<h3 style="margin-top: 25px;">
-					<span>Bienvenido ${usuario.nombreUsuario}</span>
-				</h3>						
-			</div>
-		</div>
-	</div>
+   	
+ 	<div 
+ 		style="width:100%;
+  		height:60%;
+  		filter:alpha(opacity=25);
+  		-moz-opacity:.25;
+  		opacity:.25;
+  		background:url(./Images/LogoVialidad.jpg);
+  		background-position: 50% 50%;
+  		background-repeat: no-repeat ">
+ 	</div>
+
 </body>
+	<%@ include file="/Bottom.html" %>
 </html>
 

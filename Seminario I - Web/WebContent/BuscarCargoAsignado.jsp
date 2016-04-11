@@ -48,12 +48,14 @@ prefix="c" %>
 				<div class="col-xs-12">
 					<p>Ingrese el numero de DNI del empleado del cual desea consultar los cargos.</p>
 					<form class="col-sm-3 formulario" action="CargosAsignadosServlet" id="BuscarCargosAsignadosForm" name="formulario">
-	 					 DNI: 
+	 					 <label for="estado" class="control-label">DNI: </label>
 	  					<input id="dni" type="text" name="dni" >
 	  					<br>
 	  					<br>
-						<div class="col-sm-offset-2 col-sm-10">
-							<button  onclick="validarCampo();" type="button" class="btn btn-default" >Buscar</button>
+	  					<div class="derecha">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button  onclick="validarCampo();" type="button" class="btn btn-default" >Buscar</button>
+							</div>
 						</div>
 					</form>
 					<script type="text/javascript">
@@ -67,12 +69,14 @@ prefix="c" %>
 						}
 					}
 					</script>
+				</div>
+				<div class="col-sm-2">
 					<button onclick="window.location.href='./AsignarCargosServlet'" class="btn btn-default">Asignar Cargos</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </body>
-
+	<%@ include file="/Bottom.html" %>
 </html>
 

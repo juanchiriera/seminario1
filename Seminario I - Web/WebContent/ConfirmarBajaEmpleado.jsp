@@ -45,5 +45,5 @@ prefix="c" %>
 		</form>
 	</div>
 </body>
-
+	<%@ include file="/Bottom.html" %>
 </html>

@@ -48,42 +48,46 @@ prefix="c" %>
 				<div class="col-xs-12">
 					<p>Complete todos los campos para ingresar un empleado.</p>
 					<form class="col-sm-3 formulario" action="AltaEmpleadoServlet" id="altaEmpleadoForm">
-	 					 Apellido: 
-	  					<input id="apellido" type="text" name="apellido" class="form-control">
-	  					<br>
-	  					<br>
-	  					 Nombre: 
-	  					<input id="nombre" type="text" name="nombre" class="form-control">
-	  					<br>
-	  					<br>
-	  					 CUIL: 
-	  					<input id="cuil" type="text" name="cuil" class="form-control">
-	  					<br>
-	  					<br>
-						Fecha de nacimiento:
-						<input type="date" name="classDate" onselect="google.script.run.dateSelect()" class="form-control">
-						<br>
-						<br>
-	  					 DNI: 
-	  					<input id="dni" type="text" name="dni" class="form-control">
-	  					<br>
-	  					<br>
-	  					Antigüedad: 
-						<input id="antiguedad" type="text" name="antiguedad" class="form-control">
-	  					<br>
-						<br>
-	  					<div class="form-group">
-							<label for="escuela" class="control-label">Escuela: </label>
-							<select id="escuela" name="escuela" class="form-control">
-								<c:forEach var="escuela" items="${escuelas}">
-									<option>${escuela.nombre}-${escuela.nro}</option>
-								</c:forEach>
-							</select>
+	 					 <div class="izquierda">
+		 					 <label for="estado" class="control-label">Apellido: </label> 
+		  					<input id="apellido" type="text" name="apellido" class="form-control">
+		  					<br>
+		  					<br>
+		  					 <label for="estado" class="control-label">Nombre: </label> 
+		  					<input id="nombre" type="text" name="nombre" class="form-control">
+		  					<br>
+		  					<br>
+		  					 <label for="estado" class="control-label">CUIL: </label> 
+		  					<input id="cuil" type="text" name="cuil" class="form-control">
+		  					<br>
+		  					<br>
+							 <label for="estado" class="control-label">Fecha de Nacimiento: </label>
+							<input type="date" name="classDate" onselect="google.script.run.dateSelect()" class="form-control">
 						</div>
-						<br>
-						<br>
-						<div class="col-sm-offset-2 col-sm-10">
-							<button  type="submit" class="btn btn-default">Cargar</button>
+						<div class="derecha">
+		  					 <label for="estado" class="control-label">DNI: </label> 
+		  					<input id="dni" type="text" name="dni" class="form-control">
+		  					<br>
+		  					<br>
+		  					<label for="estado" class="control-label">Antigüedad: </label> 
+							<input id="antiguedad" type="text" name="antiguedad" class="form-control">
+		  					<br>
+							<br>
+		  					<div class="form-group">
+								<label for="escuela" class="control-label">Escuela: </label>
+								<select id="escuela" name="escuela" class="form-control">
+									<c:forEach var="escuela" items="${escuelas}">
+										<option>${escuela.nombre}-${escuela.nro}</option>
+									</c:forEach>
+								</select>
+							</div>
+							<br>
+							<br>
+							<br>
+							<br>
+							<div class="col-sm-offset-2 col-sm-10">
+								<button  type="submit" class="btn btn-default">Cargar</button>
+							</div>
 						</div>
 					</form>
 
@@ -92,6 +96,6 @@ prefix="c" %>
 		</div>
 	</div>
 </body>
-
+	<%@ include file="/Bottom.html" %>
 </html>
 

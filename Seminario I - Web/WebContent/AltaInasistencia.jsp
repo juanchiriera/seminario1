@@ -62,7 +62,6 @@ prefix="c" %>
 									<c:forEach var="licencia" items="${licencias}">
 										<option value="${licencia.codigo}">${licencia.tipo} - ${licencia.motivo}</option>
 									</c:forEach>
-
 						</select>
 	  					<br>
 	  					<br>
@@ -91,6 +90,6 @@ prefix="c" %>
 		</div>
 	</div>
 </body>
- 
+ 	<%@ include file="/Bottom.html" %>
 </html>
 

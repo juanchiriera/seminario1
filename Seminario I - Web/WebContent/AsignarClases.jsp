@@ -90,6 +90,6 @@ prefix="c" %>
 		</div>
 	</div>
 </body>
-
+	<%@ include file="/Bottom.html" %>
 </html>
 

@@ -48,12 +48,14 @@ prefix="c" %>
 				<div class="col-xs-12">
 					<p>Ingrese el numero de DNI del empleado del cual desea dar la Baja.</p>
 					<form class="col-sm-3 formulario" action="BajaEmpleadoServlet" id="BajaEmpleadoForm">
-	 					 DNI: 
+	 					 <label for="estado" class="control-label">DNI: </label> 
 	  					<input id="dni" type="text" name="dni" >
 	  					<br>
 	  					<br>
-						<div class="col-sm-offset-2 col-sm-10">
-							<button  type="submit" class="btn btn-default">Buscar</button>
+	  					<div class=derecha>
+							<div class="col-sm-offset-2 col-sm-10">
+								<button  type="submit" class="btn btn-default">Buscar</button>
+							</div>
 						</div>
 					</form>
 
@@ -62,6 +64,6 @@ prefix="c" %>
 		</div>
 	</div>
 </body>
-
+	<%@ include file="/Bottom.html" %>
 </html>
 
