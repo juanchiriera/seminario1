@@ -4764,6 +4764,15 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 	display: block;
 	padding: 30px;
 	padding-left: 45px;
+	width: 50%;
+}
+
+.izquierda{
+	float:left;
+}
+
+.derecha{
+	float:right;
 }
 
 .navbar-form {
