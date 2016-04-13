@@ -66,8 +66,7 @@ public class Sistema {
 		clases = new Vector<Clase>();
 	}
 
-	// --------------------------ADMINISTRACION DE
-	// EMPLEADOS----------------------//
+	// --------------------------ADMINISTRACION DE EMPLEADOS----------------------//
 	public String iniciarSesion(String nombreUsuario, String password) {
 		Usuario usuario = buscarUsuario(nombreUsuario);
 		if (usuario != null) {
@@ -380,8 +379,7 @@ public class Sistema {
 		}
 	}
 
-	// --------------------------ADMINISTRACION DE
-	// ESCUELAS----------------------//
+	// --------------------------ADMINISTRACION DE ESCUELAS----------------------//
 
 	// Busco una sola escuela
 	public Escuela buscarEscuela(int numero) {
@@ -434,8 +432,7 @@ public class Sistema {
 		}
 	}
 
-	// --------------------------ADMINISTRACION DE
-	// CARGOS----------------------//
+	// --------------------------ADMINISTRACION DE CARGOS----------------------//
 
 	// Para filtrar la busqueda por alguno de los campos
 	public Vector<Cargo> buscarCargos(String nombreCargo, float sueldoBasico, int horasTrabajo) {
@@ -501,8 +498,7 @@ public class Sistema {
 		}
 	}
 
-	// --------------------------ADMINISTRACION DE
-	// CLASES----------------------//
+	// --------------------------ADMINISTRACION DE CLASES----------------------//
 
 	// Para filtrar la busqueda por alguno de los campos
 	public Vector<Clase> buscarClases(int numero, String nombre, String curso, String division) {
@@ -561,8 +557,7 @@ public class Sistema {
 		}
 	}
 
-	// --------------------------ADMINISTRACION DE
-	// NOVEDADES----------------------//
+	// --------------------------ADMINISTRACION DE NOVEDADES----------------------//
 
 	// Se concidera Licencia siempre y cuando sea justificable (Ver tabla de
 	// licencias)
