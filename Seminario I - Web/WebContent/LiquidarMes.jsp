@@ -11,7 +11,7 @@ prefix="c" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
-	<%@ include file="/head.html" %>
+	<%@ include file="/head.html"%>
 	<script>
 	$(function() {
 		$('.selectpicker').selectpicker({
@@ -28,7 +28,7 @@ prefix="c" %>
 </head>
 
 <body>
-
+	<%@ include file="/nav.html"%>
 	<div class="container-fluid">
 		<div class="row">
 
@@ -42,7 +42,14 @@ prefix="c" %>
 
 				<div class="col-xs-12">
 					<p> Complete los campos para liquidar sueldos</p>
-					<form class="form-horizontal" action="LiquidarSueldosServlet" id="LiquidarSueldosForm">
+					<form class="form-horizontal" action="LiquidarSueldosServlet" id="LiquidarSueldosForm" style="
+						background-color: #d9edf7;
+					    border-radius: 5px;
+					    display: block;
+					    padding: 30px;
+					    padding-left: 45px;
+					    width: 50%;
+					    height: 50%;">
 	 					
 	 					<div class="form-group">
 							<label for="escuela" class="col-sm-2 control-label">Escuela: </label>
@@ -56,7 +63,9 @@ prefix="c" %>
 <!-- 	  					Lo ideal sería que traiga los últimos 12 meses desde el día actual, pero no me sale-->
   						<div class="form-group">
 							<label for="estado" class="col-sm-2 control-label">Periodo/mes: </label>
-							<select name="mes">
+							<select name="mes" class="form-control" style="
+/* 							    margin-top: 9; */
+    							">
 					            <option value="0">Enero</option>
 					            <option value="1">Febrero</option>
 					            <option value="2">Marzo</option>
@@ -73,16 +82,19 @@ prefix="c" %>
 						</div>
 	  					<br>
 	  					<div class="col-sm-offset-2 col-sm-10">
-							<button  type="submit" class="btn btn-default">Generar TXT</button>
+							<button  type="submit" class="btn btn-default" style="
+							    margin-left: 300;">
+							Generar TXT</button>
 					</form>
 				</div>
 			</div>
 		</div>
 		<div class="col-sm-2">
-			<button onclick="window.location.href='./home.jsp'" class="btn btn-default">Regresar</button>
+			<button onclick="window.location.href='./home.jsp'" class="btn btn-default" style="margin-left: 40;">
+			Regresar</button>
 		</div>
 	</div>
 </body>
- 
+ 	<%@ include file="/Bottom.html" %>
 </html>
 
