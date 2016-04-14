@@ -29,7 +29,7 @@ public class AsignarCargosServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
-			request.setAttribute("empleados", Sistema.getInstancia().recuperarEmpleados());
+			request.setAttribute("empleados", Sistema.getInstancia().recuperarEmpleadosConCargo());
 			request.setAttribute("cargos", Sistema.getInstancia().recuperarCargos());
 			
 			request.getRequestDispatcher("/AsignarCargos.jsp").forward(request, response);

@@ -66,7 +66,7 @@ prefix="c" %>
 	  					<br>
 						<label for="estado" class="control-label">Clase: </label>
 						<select id="clase" name="clase" class="form-control">
-									<c:forEach var="clase" items="${docente.clases}">
+									<c:forEach var="clase" items="${clases}">
 										<option value="${clase.nroClase}">${clase.getNombre()} - ${clase.getCurso()} - ${clase.getDivision()}</option>
 									</c:forEach>
 						</select>

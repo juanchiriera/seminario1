@@ -163,6 +163,7 @@ public class Sistema {
 		}
 		if (flag == true) {
 			empleado.getCargos().add(cargo);
+			empleado.setEstado(true);
 		}
 		EmpleadoSRV.actualizarEmpleado(empleado);
 
@@ -817,9 +818,10 @@ public class Sistema {
 					while ((auxSueldo + sueldo).length() < 10) {
 						auxSueldo = auxSueldo + "0";
 					}
+					System.out.println("SueldoE: " + sueldo);
 					auxSueldo = auxSueldo + sueldo;
 					String concepto = cargo.getNombre().substring(0, 5);
-					stringArchivo = stringArchivo + empleado.getCuil() + concepto + stringFecha + auxSueldo + "001\n";
+					stringArchivo = stringArchivo + empleado.getCuil() + concepto + stringFecha + auxSueldo + "001\r\n";
 				}
 			}
 		}
@@ -834,7 +836,7 @@ public class Sistema {
 				String concepto = "profs";
 				System.out.println(stringFecha);
 				System.out.println(auxSueldo);
-				stringArchivo = stringArchivo + docente.getCuil() + concepto + stringFecha + auxSueldo + "001\n";
+				stringArchivo = stringArchivo + docente.getCuil() + concepto + stringFecha + auxSueldo + "001\r\n";
 			}
 		}
 		return stringArchivo;

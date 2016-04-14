@@ -57,7 +57,6 @@ public class LiquidarSueldosServlet extends HttpServlet {
 		}
 		os.flush();
 		os.close();
-		response.sendRedirect("home.jsp");
 	}
 
 	/**

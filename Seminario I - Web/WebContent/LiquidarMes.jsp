@@ -4,7 +4,7 @@
 prefix="c" %>
 <% 
  if ((session.getAttribute("login") == null) || (session.getAttribute("login") == "")) {
-  response.sendRedirect("/WebSystem/index.jsp");
+  response.sendRedirect("./index.jsp");
  }
 %>
 
@@ -77,6 +77,9 @@ prefix="c" %>
 					</form>
 				</div>
 			</div>
+		</div>
+		<div class="col-sm-2">
+			<button onclick="window.location.href='./home.jsp'" class="btn btn-default">Regresar</button>
 		</div>
 	</div>
 </body>
