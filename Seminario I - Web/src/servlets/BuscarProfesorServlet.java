@@ -31,17 +31,21 @@ public class BuscarProfesorServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nombre = request.getParameter("nombre");
-		String apellido = request.getParameter("apellido");
-		String cuil = request.getParameter("cuil");
-		String dni = request.getParameter("dni");
-		boolean estado = Boolean.parseBoolean(request.getParameter("estado"));
-		String materia = request.getParameter("materia");
-		String curso = request.getParameter("curso");
-		String division = request.getParameter("division");
-		List<Empleado> docentes = Sistema.getInstancia().buscarDocentes(apellido, nombre, cuil, dni, materia, curso, division, estado);
-		request.setAttribute("docentes", docentes);
-		getServletContext().getRequestDispatcher("/ListaDocentes.jsp").forward(request, response);
+		try{	
+			String nombre = request.getParameter("nombre");
+			String apellido = request.getParameter("apellido");
+			String cuil = request.getParameter("cuil");
+			String dni = request.getParameter("dni");
+			boolean estado = Boolean.parseBoolean(request.getParameter("estado"));
+			String materia = request.getParameter("materia");
+			String curso = request.getParameter("curso");
+			String division = request.getParameter("division");
+			List<Empleado> docentes = Sistema.getInstancia().buscarDocentes(apellido, nombre, cuil, dni, materia, curso, division, estado);
+			request.setAttribute("docentes", docentes);
+			getServletContext().getRequestDispatcher("/ListaDocentes.jsp").forward(request, response);
+		}catch(Exception e){
+			getServletContext().getRequestDispatcher("/Error.jsp").forward(request, response);
+		}
 	}
 	
 	/**

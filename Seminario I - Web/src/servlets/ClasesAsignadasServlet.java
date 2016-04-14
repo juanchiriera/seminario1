@@ -33,10 +33,14 @@ public class ClasesAsignadasServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String dniEmpleado = request.getParameter("dni");
-		Collection<Clase> listaClases = Sistema.getInstancia().buscarClasesDeEmpleado(dniEmpleado);
-		request.setAttribute("clases", listaClases);
-		getServletContext().getRequestDispatcher("/ListaClases.jsp").forward(request, response);
+		try{
+			String dniEmpleado = request.getParameter("dni");
+			Collection<Clase> listaClases = Sistema.getInstancia().buscarClasesDeEmpleado(dniEmpleado);
+			request.setAttribute("clases", listaClases);
+			getServletContext().getRequestDispatcher("/ListaClases.jsp").forward(request, response);
+		}catch(Exception e){
+			getServletContext().getRequestDispatcher("/Error.jsp").forward(request, response);
+		}
 	}
 
 	/**

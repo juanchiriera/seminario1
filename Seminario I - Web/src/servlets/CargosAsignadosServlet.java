@@ -32,11 +32,14 @@ public class CargosAsignadosServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try{	
 		String dniEmpleado = request.getParameter("dni");
-		Collection<Cargo> listaCargos = Sistema.getInstancia().buscarCargosEmpleado(dniEmpleado);
-		request.setAttribute("cargos", listaCargos);
-		getServletContext().getRequestDispatcher("/ListaCargos.jsp").forward(request, response);
-		
+			Collection<Cargo> listaCargos = Sistema.getInstancia().buscarCargosEmpleado(dniEmpleado);
+			request.setAttribute("cargos", listaCargos);
+			getServletContext().getRequestDispatcher("/ListaCargos.jsp").forward(request, response);
+		}catch(Exception e){
+			getServletContext().getRequestDispatcher("/Error.jsp").forward(request, response);
+		}
 	}
 
 	/**

@@ -32,10 +32,14 @@ public class BajaEmpleadoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		dni = request.getParameter("dni");
-		Empleado empleado = Sistema.getInstancia().buscarEmpleado(dni);
-		request.setAttribute("empleado", empleado);
-		getServletContext().getRequestDispatcher("/ConfirmarBajaEmpleado.jsp").forward(request, response);
+		try{	
+			dni = request.getParameter("dni");
+			Empleado empleado = Sistema.getInstancia().buscarEmpleado(dni);
+			request.setAttribute("empleado", empleado);
+			getServletContext().getRequestDispatcher("/ConfirmarBajaEmpleado.jsp").forward(request, response);
+		}catch(Exception e){
+			getServletContext().getRequestDispatcher("/Error.jsp").forward(request, response);
+		}
 	}
 
 	/**

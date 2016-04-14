@@ -32,25 +32,22 @@ public class BuscarEmpleadoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nombre = request.getParameter("nombre");
-		String apellido = request.getParameter("apellido");
-		String cuil = request.getParameter("cuil");
-		String dni = request.getParameter("dni");
-		boolean estado = Boolean.parseBoolean(request.getParameter("estado"));
-		String [] escuelaAux = request.getParameter("escuela").split("-");
-		int nroEscuela = Integer.parseInt(escuelaAux[1]);
-		Escuela escuela = Sistema.getInstancia().buscarEscuela(nroEscuela);
-		
-		System.out.println(apellido);
-		System.out.println(nombre);
-		System.out.println(cuil);
-		System.out.println(dni);
-		System.out.println(estado);
-		System.out.println(nroEscuela);
-		
-		List<Empleado> empleados = Sistema.getInstancia().buscarEmpleados(nombre , apellido, cuil, dni, estado, escuela);
-		request.setAttribute("empleados", empleados);
-		getServletContext().getRequestDispatcher("/ListaEmpleados.jsp").forward(request, response);
+		try{	
+			String nombre = request.getParameter("nombre");
+			String apellido = request.getParameter("apellido");
+			String cuil = request.getParameter("cuil");
+			String dni = request.getParameter("dni");
+			boolean estado = Boolean.parseBoolean(request.getParameter("estado"));
+			String [] escuelaAux = request.getParameter("escuela").split("-");
+			int nroEscuela = Integer.parseInt(escuelaAux[1]);
+			Escuela escuela = Sistema.getInstancia().buscarEscuela(nroEscuela);
+			
+			List<Empleado> empleados = Sistema.getInstancia().buscarEmpleados(nombre , apellido, cuil, dni, estado, escuela);
+			request.setAttribute("empleados", empleados);
+			getServletContext().getRequestDispatcher("/ListaEmpleados.jsp").forward(request, response);
+		}catch(Exception e){
+			getServletContext().getRequestDispatcher("/Error.jsp").forward(request, response);
+		}
 	}
 	
 	/**

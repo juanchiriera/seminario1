@@ -31,22 +31,25 @@ public class AltaEmpleadoServlet extends HttpServlet {
 	 */
 	@SuppressWarnings("deprecation")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String apellido = request.getParameter("apellido");
-		String nombre = request.getParameter("nombre");
-		String cuil = request.getParameter("cuil");
-		String fechaNacim = request.getParameter("classDate");
-		String dni = request.getParameter("dni");
-		int antiguedad = Integer.parseInt(request.getParameter("antiguedad"));
-		String [] dateAux = fechaNacim.split("-");
-		int year = Integer.parseInt(dateAux[0])-1900;
-		int month = Integer.parseInt(dateAux[1])-1;
-		int day = Integer.parseInt(dateAux[2]);
-		Date fechaNacimiento = new Date(year,month,day);
-		String [] escuelaAux = request.getParameter("escuela").split("-");
-		int nroEscuela = Integer.parseInt(escuelaAux[1]);
-		Sistema.getInstancia().altaEmpleado(nombre, apellido, dni, cuil, fechaNacimiento, antiguedad, nroEscuela);
-		response.sendRedirect("home.jsp");
-		
+		try{
+			String apellido = request.getParameter("apellido");
+			String nombre = request.getParameter("nombre");
+			String cuil = request.getParameter("cuil");
+			String fechaNacim = request.getParameter("classDate");
+			String dni = request.getParameter("dni");
+			int antiguedad = Integer.parseInt(request.getParameter("antiguedad"));
+			String [] dateAux = fechaNacim.split("-");
+			int year = Integer.parseInt(dateAux[0])-1900;
+			int month = Integer.parseInt(dateAux[1])-1;
+			int day = Integer.parseInt(dateAux[2]);
+			Date fechaNacimiento = new Date(year,month,day);
+			String [] escuelaAux = request.getParameter("escuela").split("-");
+			int nroEscuela = Integer.parseInt(escuelaAux[1]);
+			Sistema.getInstancia().altaEmpleado(nombre, apellido, dni, cuil, fechaNacimiento, antiguedad, nroEscuela);
+			response.sendRedirect("home.jsp");
+		}catch(Exception e){
+			getServletContext().getRequestDispatcher("/Error.jsp").forward(request, response);
+		}
 	}
 
 	/**

@@ -31,12 +31,16 @@ public class SueldoEmpleadoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String dni = request.getParameter("dni");
-		Empleado e = Sistema.getInstancia().buscarEmpleado(dni);
-		float sueldo = Sistema.getInstancia().calcularSueldo(dni, (new Date()).getMonth()+1);
-		request.setAttribute("sueldo", sueldo);
-		request.setAttribute("empleado", e);
-		getServletContext().getRequestDispatcher("/VerSueldoEmpleado.jsp").forward(request, response);
+		try{	
+			String dni = request.getParameter("dni");
+			Empleado e = Sistema.getInstancia().buscarEmpleado(dni);
+			float sueldo = Sistema.getInstancia().calcularSueldo(dni, (new Date()).getMonth()+1);
+			request.setAttribute("sueldo", sueldo);
+			request.setAttribute("empleado", e);
+			getServletContext().getRequestDispatcher("/VerSueldoEmpleado.jsp").forward(request, response);
+		}catch(Exception e){
+			getServletContext().getRequestDispatcher("/Error.jsp").forward(request, response);
+		}
 	}
 
 	/**

@@ -36,10 +36,9 @@ prefix="c" %>
 
 			<div class="2 main">
 				<div></div>
-				<h1 class="page-header" style="margin-top: 15px;">
-					<button type="button" style="" class="btn btn-default btn-lg">
-						<span class="glyphicon glyphicon-oil"></span>
-					</button>
+				<h1 class="page-header" style="
+					margin-top: 15px;
+					margin-left: 18px;">
 					Consultar profesor
 				</h1>
 
@@ -49,7 +48,7 @@ prefix="c" %>
 					<p>Complete uno o varios campos para buscar a un profesor.</p>
 					<form class="col-sm-3 formulario" action="BuscarProfesorServlet" id="BuscarProfesorForm">
 	 					<div class="izquierda">	
-	 					 <label for="estado" class="control-label">Apellido: </label>: 
+	 					 <label for="estado" class="control-label">Apellido: </label> 
 	  					<input id="apellido" type="text" name="apellido" class="form-control">
 	  					<br>
 	  					<br>

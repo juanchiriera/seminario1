@@ -36,10 +36,9 @@ prefix="c" %>
 
 			<div class="2 main">
 				<div></div>
-				<h1 class="page-header" style="margin-top: 15px;">
-					<button type="button" style="" class="btn btn-default btn-lg">
-						<span class="glyphicon glyphicon-oil"></span>
-					</button>
+				<h1 class="page-header" style="
+					margin-top: 15px;
+					margin-left: 18px;">
 					Alta inasistencia
 				</h1>
 
@@ -48,7 +47,7 @@ prefix="c" %>
 				<div class="col-xs-12">
 					<p>Complete todos los campos para ingresar una nueva inasistencia.</p>
 					<form class="col-sm-3 formulario" action="AltaInasistenciaEmpleadoServlet" id="altaInasistenciaForm">
-						Empleado: 
+						<label for="estado" class="control-label">Empleado: </label> 
 	  					<select id="dni" name="dni" class="form-control">
 									<c:forEach var="empleado" items="${empleados}">
 										<option value="${empleado.dni}">${empleado.nombre} ${empleado.apellido}</option>
@@ -57,7 +56,7 @@ prefix="c" %>
 						</select>
 						<br>
 						<br>
-						Licencia:
+						<label for="estado" class="control-label">Licencia: </label>
 						<select id="licencia" name="licencia" class="form-control">
 									<c:forEach var="licencia" items="${licencias}">
 										<option value="${licencia.codigo}">${licencia.tipo} - ${licencia.motivo}</option>
@@ -65,11 +64,11 @@ prefix="c" %>
 						</select>
 	  					<br>
 	  					<br>
-						Fecha:
+						<label for="estado" class="control-label">Fecha: </label>
 						<input id="fecha" type="date" name="classDate" onselect="google.script.run.dateSelect()" class="form-control">
 						<br>
 						<br>
-						Cantidad de dias ausente:
+						<label for="estado" class="control-label">Cantidad de dias ausentes: </label>
 						<input id="cantDiasAusente" type="int" name="cantDiasAusente" class="form-control">
 						<br>
 						<br>

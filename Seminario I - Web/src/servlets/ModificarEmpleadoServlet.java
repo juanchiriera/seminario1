@@ -29,10 +29,14 @@ public class ModificarEmpleadoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String dni = request.getParameter("dni");
-		Empleado empleado = Sistema.getInstancia().buscarEmpleado(dni);
-		request.setAttribute("empleado", empleado);
-		getServletContext().getRequestDispatcher("/ModificarEmpleado.jsp").forward(request, response);
+		try{
+			String dni = request.getParameter("dni");
+			Empleado empleado = Sistema.getInstancia().buscarEmpleado(dni);
+			request.setAttribute("empleado", empleado);
+			getServletContext().getRequestDispatcher("/ModificarEmpleado.jsp").forward(request, response);
+		}catch(Exception e){
+			getServletContext().getRequestDispatcher("/Error.jsp").forward(request, response);
+		}
 	}
 
 	/**

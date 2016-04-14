@@ -35,13 +35,17 @@ public class AltaInasistenciaProfesorServletNew extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<SinCargo> docentes = Sistema.getInstancia().recuperarProfesores();
-		request.setAttribute("docentes", docentes);
-		List<Licencia> licencias = Sistema.getInstancia().recuperarLicencias();
-		request.setAttribute("licencias", licencias);
-		List<Clase> clases = Sistema.getInstancia().getClases();
-		request.setAttribute("clases", clases);
-		getServletContext().getRequestDispatcher("/AltaInasistenciaProfesor.jsp").forward(request, response);
+		try{
+			List<SinCargo> docentes = Sistema.getInstancia().recuperarProfesores();
+			request.setAttribute("docentes", docentes);
+			List<Licencia> licencias = Sistema.getInstancia().recuperarLicencias();
+			request.setAttribute("licencias", licencias);
+			List<Clase> clases = Sistema.getInstancia().getClases();
+			request.setAttribute("clases", clases);
+			getServletContext().getRequestDispatcher("/AltaInasistenciaProfesor.jsp").forward(request, response);
+		}catch(Exception e){
+			getServletContext().getRequestDispatcher("/Error.jsp").forward(request, response);
+		}
 	}
 
 	/**

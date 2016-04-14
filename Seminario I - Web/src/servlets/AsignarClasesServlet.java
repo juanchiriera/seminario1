@@ -28,11 +28,15 @@ public class AsignarClasesServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("profesores", Sistema.getInstancia().recuperarEmpleados());
-//		TODO Empleados con cargo aca y sin cargo en AsignarClases
-		request.setAttribute("clases", Sistema.getInstancia().getClases());
-		
-		request.getRequestDispatcher("/AsignarClases.jsp").forward(request, response);
+		try{
+			request.setAttribute("profesores", Sistema.getInstancia().recuperarEmpleados());
+	//		TODO Empleados con cargo aca y sin cargo en AsignarClases
+			request.setAttribute("clases", Sistema.getInstancia().getClases());
+			
+			request.getRequestDispatcher("/AsignarClases.jsp").forward(request, response);
+		}catch(Exception e){
+			getServletContext().getRequestDispatcher("/Error.jsp").forward(request, response);
+		}
 	}
 
 	/**

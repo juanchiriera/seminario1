@@ -29,19 +29,22 @@ public class AsignarClasesServletNew extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String dniProfesorAux = request.getParameter("profesor");
-		String [] profesorArray = dniProfesorAux.split("-");
-		String dni = profesorArray[1].trim();
-		
-		String nroClaseAux = request.getParameter("clase");
-		String [] claseArray = nroClaseAux.split("-");
-		int nroClase = Integer.parseInt(claseArray[0]);
-		
-		Clase clase = Sistema.getInstancia().buscarClase(nroClase);
-		boolean estado = Boolean.parseBoolean(request.getParameter("estado"));
-		Sistema.getInstancia().altaClaseEmpleado(dni, clase, estado);
-		response.sendRedirect("home.jsp");
+		try{
+			String dniProfesorAux = request.getParameter("profesor");
+			String [] profesorArray = dniProfesorAux.split("-");
+			String dni = profesorArray[1].trim();
+			
+			String nroClaseAux = request.getParameter("clase");
+			String [] claseArray = nroClaseAux.split("-");
+			int nroClase = Integer.parseInt(claseArray[0]);
+			
+			Clase clase = Sistema.getInstancia().buscarClase(nroClase);
+			boolean estado = Boolean.parseBoolean(request.getParameter("estado"));
+			Sistema.getInstancia().altaClaseEmpleado(dni, clase, estado);
+			response.sendRedirect("home.jsp");
+		}catch(Exception e){
+			getServletContext().getRequestDispatcher("/Error.jsp").forward(request, response);
+		}
 		
 	}
 
