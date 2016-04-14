@@ -10,23 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controlador.Sistema;
-import negocio.Clase;
-import negocio.Empleado;
 import negocio.Escuela;
-import negocio.Licencia;
-import negocio.SinCargo;
 
 /**
- * Servlet implementation class AltaInasistenciaServletNew
+ * Servlet implementation class LiquidarSueldosServletNew
  */
-@WebServlet("/AltaInasistenciaProfesorServletNew")
-public class AltaInasistenciaProfesorServletNew extends HttpServlet {
+@WebServlet("/LiquidarSueldosServletNew")
+public class LiquidarSueldosServletNew extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AltaInasistenciaProfesorServletNew() {
+    public LiquidarSueldosServletNew() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,13 +31,9 @@ public class AltaInasistenciaProfesorServletNew extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<SinCargo> docentes = Sistema.getInstancia().recuperarProfesores();
-		request.setAttribute("docentes", docentes);
-		List<Licencia> licencias = Sistema.getInstancia().recuperarLicencias();
-		request.setAttribute("licencias", licencias);
-		List<Clase> clases = Sistema.getInstancia().getClases();
-		request.setAttribute("clases", clases);
-		getServletContext().getRequestDispatcher("/AltaInasistenciaProfesor.jsp").forward(request, response);
+		List<Escuela> escuelas = Sistema.getInstancia().recuperarEscuelas();
+		request.setAttribute("escuelas", escuelas);
+		getServletContext().getRequestDispatcher("/LiquidarMes.jsp").forward(request, response);
 	}
 
 	/**

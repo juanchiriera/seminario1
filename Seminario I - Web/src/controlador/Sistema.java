@@ -1,5 +1,9 @@
 package controlador;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -9,6 +13,7 @@ import java.util.Vector;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.loader.GeneratedCollectionAliases;
 
 import hbt.HibernateUtil;
 import view.DescuentoV;
@@ -66,7 +71,8 @@ public class Sistema {
 		clases = new Vector<Clase>();
 	}
 
-	// --------------------------ADMINISTRACION DE EMPLEADOS----------------------//
+	// --------------------------ADMINISTRACION DE
+	// EMPLEADOS----------------------//
 	public String iniciarSesion(String nombreUsuario, String password) {
 		Usuario usuario = buscarUsuario(nombreUsuario);
 		if (usuario != null) {
@@ -116,8 +122,8 @@ public class Sistema {
 
 	public void altaClaseEmpleado(String dni, Clase clase, boolean estado) {
 		SinCargo profesor = EmpleadoSRV.buscarEmpleadoSinCargo(dni);
-		if(profesor==null){
-			//TODO ARREGLAR!!
+		if (profesor == null) {
+			// TODO ARREGLAR!!
 			ConCargo empleado = EmpleadoSRV.buscarEmpleadoConCargo(dni);
 			profesor = new SinCargo(empleado);
 			empleado.setEstado(false);
@@ -127,11 +133,12 @@ public class Sistema {
 			profesor.getClases().add(clase);
 			profesor.setEstado(true);
 			EmpleadoSRV.grabarEmpleado(profesor);
-//			Session session = HibernateUtil.getSessionFactory().openSession();
-//			Transaction tr = session.beginTransaction();
-//			session.update(profesor);
-//			tr.commit();
-//			session.close();
+			// Session session =
+			// HibernateUtil.getSessionFactory().openSession();
+			// Transaction tr = session.beginTransaction();
+			// session.update(profesor);
+			// tr.commit();
+			// session.close();
 
 		} else {
 			/** TODO El empleado ya tiene esa clase asignada **/
@@ -158,7 +165,7 @@ public class Sistema {
 			empleado.getCargos().add(cargo);
 		}
 		EmpleadoSRV.actualizarEmpleado(empleado);
-		
+
 	}
 
 	public void altaEmpleado(String nombre, String apellido, String dni, String cuil, Date fechaDeNacimiento,
@@ -224,13 +231,14 @@ public class Sistema {
 			mostrarDatos = new InasistenciaV(emp.getApellido(), emp.getNombre(), emp.getDni());
 			List<Licencia> licenciasBd = LicenciaSRV.recuperarLicencias();
 			Vector<LicenciaEmpleado> licenciasEmpleadoV = new Vector<LicenciaEmpleado>();
-			for(Licencia licenciaBd : licenciasBd){
-				licenciasEmpleadoV.add(new LicenciaEmpleado(licenciaBd.getTiempo(), licenciaBd) );
+			for (Licencia licenciaBd : licenciasBd) {
+				licenciasEmpleadoV.add(new LicenciaEmpleado(licenciaBd.getTiempo(), licenciaBd));
 			}
 			for (LicenciaEmpleado licencia : emp.getLicenciasEmpleados()) {
-				LicenciaEmpleado licenciaEmpleadoAux = buscarLicenciaEmpleado(licenciasEmpleadoV, licencia.getLicencia());
+				LicenciaEmpleado licenciaEmpleadoAux = buscarLicenciaEmpleado(licenciasEmpleadoV,
+						licencia.getLicencia());
 				licenciaEmpleadoAux.setCantDisponible(licencia.getCantDisponible());
-				
+
 			}
 			mostrarDatos.setLicencias(licenciasEmpleadoV);
 		}
@@ -239,7 +247,7 @@ public class Sistema {
 
 	private LicenciaEmpleado buscarLicenciaEmpleado(Vector<LicenciaEmpleado> licenciasEmpleadoV, Licencia licencia) {
 		for (LicenciaEmpleado licenciaEmpleado : licenciasEmpleadoV) {
-			if(licenciaEmpleado.getLicencia().getCodigo()==licencia.getCodigo())
+			if (licenciaEmpleado.getLicencia().getCodigo() == licencia.getCodigo())
 				return licenciaEmpleado;
 		}
 		return null;
@@ -251,14 +259,14 @@ public class Sistema {
 		float sueldoTotal = 0;
 		if (empleadoS != null) {
 			float sueldoBruto = empleadoS.calcularSueldoSemanal() * cantidadSemandasMes(mes);
-			sueldoTotal = sueldoBruto - calcularDescuento(dni, mes,0);
+			sueldoTotal = sueldoBruto - calcularDescuento(dni, mes, 0);
 			return sueldoTotal;
 		}
 		if (empleadoC != null) {
 			float sueldoBruto = empleadoC.calcularSueldo();
 			float descuento = 0;
 			for (Cargo cargo : empleadoC.getCargos()) {
-				descuento += calcularDescuento(dni,mes,cargo.getSueldoDiaDeTrabajo());
+				descuento += calcularDescuento(dni, mes, cargo.getSueldoDiaDeTrabajo());
 			}
 			sueldoTotal = sueldoBruto - descuento;
 			return sueldoTotal;
@@ -270,17 +278,15 @@ public class Sistema {
 		Empleado emp = buscarEmpleado(dni);
 		float descuento = 0;
 		if (emp != null) {
-			 List<Novedad> novedadesEmpleado = emp.getNovedades();
-			for (Novedad novedad : novedadesEmpleado ) {
-				if (novedad.getFecha().getMonth()+1 == mes) 
+			List<Novedad> novedadesEmpleado = emp.getNovedades();
+			for (Novedad novedad : novedadesEmpleado) {
+				if (novedad.getFecha().getMonth() + 1 == mes)
 					descuento += novedad.obtenerDescuentoTotal(basico);
 			}
 			return descuento;
 		}
 		return 0; /** TODO mensaje error **/
 	}
-
-	
 
 	public Vector<EmpleadoV> mostrarEmpleadosPorEscuela(int nroEscuela) {
 		Vector<EmpleadoV> mostrarDatos = new Vector<EmpleadoV>();
@@ -355,8 +361,8 @@ public class Sistema {
 		}
 	}
 
-	public void altaLicencia(int codigo, String tipo, String motivo, float haberes, int tiempo,
-			int antiguedadRequerida, boolean certificado) {
+	public void altaLicencia(int codigo, String tipo, String motivo, float haberes, int tiempo, int antiguedadRequerida,
+			boolean certificado) {
 		Licencia lic = buscarLicencia(codigo);
 		if (lic == null) {
 			lic = new Licencia(codigo, tipo, motivo, haberes, tiempo, antiguedadRequerida, certificado);
@@ -366,7 +372,8 @@ public class Sistema {
 		}
 	}
 
-	// --------------------------ADMINISTRACION DE ESCUELAS----------------------//
+	// --------------------------ADMINISTRACION DE
+	// ESCUELAS----------------------//
 
 	// Busco una sola escuela
 	public Escuela buscarEscuela(int numero) {
@@ -419,7 +426,8 @@ public class Sistema {
 		}
 	}
 
-	// --------------------------ADMINISTRACION DE CARGOS----------------------//
+	// --------------------------ADMINISTRACION DE
+	// CARGOS----------------------//
 
 	// Para filtrar la busqueda por alguno de los campos
 	public Vector<Cargo> buscarCargos(String nombreCargo, float sueldoBasico, int horasTrabajo) {
@@ -441,16 +449,16 @@ public class Sistema {
 	}
 
 	public void modificarCargo(int idCargo, String nombre, float sueldoBasico, int horasTrabajo) {
-//		Cargo cargo = buscarCargo(nombre);
-//		if (cargo != null) {
-//			cargo.setIdCargo(idCargo);
-//			cargo.setNombre(nombre);
-//			cargo.setSueldoBasico(sueldoBasico);
-//			cargo.setHoras(horasTrabajo);
-//			CargoSRV.guardarCargo(cargo);
-//		} else {
-//			/** TODO El codigo no corresponde a un cargo existente **/
-//		}
+		// Cargo cargo = buscarCargo(nombre);
+		// if (cargo != null) {
+		// cargo.setIdCargo(idCargo);
+		// cargo.setNombre(nombre);
+		// cargo.setSueldoBasico(sueldoBasico);
+		// cargo.setHoras(horasTrabajo);
+		// CargoSRV.guardarCargo(cargo);
+		// } else {
+		// /** TODO El codigo no corresponde a un cargo existente **/
+		// }
 	}
 
 	public List<Cargo> recuperarCargos() {
@@ -485,7 +493,8 @@ public class Sistema {
 		}
 	}
 
-	// --------------------------ADMINISTRACION DE CLASES----------------------//
+	// --------------------------ADMINISTRACION DE
+	// CLASES----------------------//
 
 	// Para filtrar la busqueda por alguno de los campos
 	public Vector<Clase> buscarClases(int numero, String nombre, String curso, String division) {
@@ -544,145 +553,169 @@ public class Sistema {
 		}
 	}
 
-	// --------------------------ADMINISTRACION DE NOVEDADES----------------------//
+	// --------------------------ADMINISTRACION DE
+	// NOVEDADES----------------------//
 
 	// Se concidera Licencia siempre y cuando sea justificable (Ver tabla de
 	// licencias)
-	
-	
-	public void cargarInasistenciaDocente(String dni, Date fecha, Licencia licencia,
-			float horasCatedraAusente, int cantDiasAusente, Clase clase){
+
+	public void cargarInasistenciaDocente(String dni, Date fecha, Licencia licencia, float horasCatedraAusente,
+			int cantDiasAusente, Clase clase) {
 		int semanasMesCorriente = cantidadSemandasMes(fecha.getMonth());
 		Empleado empleado = buscarEmpleado(dni);
 		if (empleado != null) {
 			LicenciaEmpleado licenciaDocente = empleado.getLicencia(licencia.getCodigo());
 			LicenciaEmpleado licenciaDocenteSinJustificar = empleado.getLicencia(3);
-			Novedad novedadPorLicencia=null;
-			Novedad novedadPorInasistenciaSinJustificar=null;
-			if(licenciaDocente!=null){
+			Novedad novedadPorLicencia = null;
+			Novedad novedadPorInasistenciaSinJustificar = null;
+			if (licenciaDocente != null) {
 				int diasRestantes = licenciaDocente.getCantDisponible();
-				if(diasRestantes-cantDiasAusente<0){
+				if (diasRestantes - cantDiasAusente < 0) {
 					Licencia licenciaSinJustificar = LicenciaSRV.buscarLicencia(3);
-					novedadPorInasistenciaSinJustificar = new Novedad(fecha,licenciaSinJustificar,horasCatedraAusente,semanasMesCorriente,cantDiasAusente - diasRestantes);
-					novedadPorLicencia = new Novedad(fecha,licenciaSinJustificar,horasCatedraAusente,semanasMesCorriente,diasRestantes);
-					if(licenciaDocenteSinJustificar==null){
-						licenciaDocenteSinJustificar = new LicenciaEmpleado(licenciaSinJustificar.getTiempo(),licenciaSinJustificar);
+					novedadPorInasistenciaSinJustificar = new Novedad(fecha, licenciaSinJustificar, horasCatedraAusente,
+							semanasMesCorriente, cantDiasAusente - diasRestantes);
+					novedadPorLicencia = new Novedad(fecha, licenciaSinJustificar, horasCatedraAusente,
+							semanasMesCorriente, diasRestantes);
+					if (licenciaDocenteSinJustificar == null) {
+						licenciaDocenteSinJustificar = new LicenciaEmpleado(licenciaSinJustificar.getTiempo(),
+								licenciaSinJustificar);
 						empleado.agregarLicenciaEmpleado(licenciaDocenteSinJustificar);
 					}
 					licenciaDocente.setCantDisponible(0);
-					licenciaDocenteSinJustificar.setCantDisponible(licenciaDocenteSinJustificar.getCantDisponible()-(cantDiasAusente - diasRestantes));
-					
-				}else{
-					novedadPorLicencia = new Novedad(fecha,licencia,horasCatedraAusente,semanasMesCorriente,cantDiasAusente);
+					licenciaDocenteSinJustificar.setCantDisponible(
+							licenciaDocenteSinJustificar.getCantDisponible() - (cantDiasAusente - diasRestantes));
+
+				} else {
+					novedadPorLicencia = new Novedad(fecha, licencia, horasCatedraAusente, semanasMesCorriente,
+							cantDiasAusente);
 					licenciaDocente.setCantDisponible(diasRestantes - cantDiasAusente);
 				}
-			}else{
-				if(empleado.getAntiguedad()>licencia.getAntiguedadRequerida()){
+			} else {
+				if (empleado.getAntiguedad() > licencia.getAntiguedadRequerida()) {
 					licenciaDocente = new LicenciaEmpleado(licencia.getTiempo(), licencia);
 					empleado.agregarLicenciaEmpleado(licenciaDocente);
-					if(cantDiasAusente>licenciaDocente.getCantDisponible()){
+					if (cantDiasAusente > licenciaDocente.getCantDisponible()) {
 						Licencia licenciaSinJustificar = LicenciaSRV.buscarLicencia(3);
-						novedadPorInasistenciaSinJustificar = new Novedad(fecha,licenciaSinJustificar,horasCatedraAusente,semanasMesCorriente,cantDiasAusente - licenciaDocente.getCantDisponible());
-						novedadPorLicencia = new Novedad(fecha,licencia,horasCatedraAusente,semanasMesCorriente,licenciaDocente.getCantDisponible());
-						if(licenciaDocenteSinJustificar==null){
-							licenciaDocenteSinJustificar = new LicenciaEmpleado(licenciaSinJustificar.getTiempo(),licenciaSinJustificar);
+						novedadPorInasistenciaSinJustificar = new Novedad(fecha, licenciaSinJustificar,
+								horasCatedraAusente, semanasMesCorriente,
+								cantDiasAusente - licenciaDocente.getCantDisponible());
+						novedadPorLicencia = new Novedad(fecha, licencia, horasCatedraAusente, semanasMesCorriente,
+								licenciaDocente.getCantDisponible());
+						if (licenciaDocenteSinJustificar == null) {
+							licenciaDocenteSinJustificar = new LicenciaEmpleado(licenciaSinJustificar.getTiempo(),
+									licenciaSinJustificar);
 							empleado.agregarLicenciaEmpleado(licenciaDocenteSinJustificar);
 						}
 						licenciaDocente.setCantDisponible(0);
-						licenciaDocenteSinJustificar.setCantDisponible(licenciaDocenteSinJustificar.getCantDisponible()-(cantDiasAusente - licenciaDocente.getCantDisponible()));
-					}else{
-						novedadPorLicencia = new Novedad(fecha,licencia,horasCatedraAusente,semanasMesCorriente,cantDiasAusente);
+						licenciaDocenteSinJustificar.setCantDisponible(licenciaDocenteSinJustificar.getCantDisponible()
+								- (cantDiasAusente - licenciaDocente.getCantDisponible()));
+					} else {
+						novedadPorLicencia = new Novedad(fecha, licencia, horasCatedraAusente, semanasMesCorriente,
+								cantDiasAusente);
 						licenciaDocente.setCantDisponible(licenciaDocente.getCantDisponible() - cantDiasAusente);
 					}
-				}else{
+				} else {
 					Licencia licenciaSinJustificar = LicenciaSRV.buscarLicencia(3);
-					if(licenciaDocenteSinJustificar==null){
-						licenciaDocenteSinJustificar = new LicenciaEmpleado(licenciaSinJustificar.getTiempo(),licenciaSinJustificar);
+					if (licenciaDocenteSinJustificar == null) {
+						licenciaDocenteSinJustificar = new LicenciaEmpleado(licenciaSinJustificar.getTiempo(),
+								licenciaSinJustificar);
 						empleado.agregarLicenciaEmpleado(licenciaDocenteSinJustificar);
 					}
-					novedadPorInasistenciaSinJustificar = new Novedad(fecha,licenciaSinJustificar,horasCatedraAusente,semanasMesCorriente,cantDiasAusente);
-					
+					novedadPorInasistenciaSinJustificar = new Novedad(fecha, licenciaSinJustificar, horasCatedraAusente,
+							semanasMesCorriente, cantDiasAusente);
+
 				}
 			}
-			if(novedadPorLicencia!=null){
+			if (novedadPorLicencia != null) {
 				novedadPorLicencia.setClase(clase);
 				empleado.agregarNovedad(novedadPorLicencia);
 			}
-			if(novedadPorInasistenciaSinJustificar!=null){
+			if (novedadPorInasistenciaSinJustificar != null) {
 				novedadPorInasistenciaSinJustificar.setClase(clase);
 				empleado.agregarNovedad(novedadPorInasistenciaSinJustificar);
 			}
 			EmpleadoSRV.actualizarEmpleado(empleado);
 		}
-		
+
 	}
-	
-	public void cargarInasistenciaEmpleado(String dni, Date fecha, Licencia licencia,
-			float horasCatedraAusente, int cantDiasAusente){
+
+	public void cargarInasistenciaEmpleado(String dni, Date fecha, Licencia licencia, float horasCatedraAusente,
+			int cantDiasAusente) {
 		int semanasMesCorriente = cantidadSemandasMes(fecha.getMonth());
 		Empleado empleado = buscarEmpleado(dni);
 		if (empleado != null) {
 			LicenciaEmpleado licenciaEmpleado = empleado.getLicencia(licencia.getCodigo());
 			LicenciaEmpleado licenciaDocenteSinJustificar = empleado.getLicencia(3);
-			Novedad novedadPorLicencia=null;
-			Novedad novedadPorInasistenciaSinJustificar=null;
-			if(licenciaEmpleado!=null){
+			Novedad novedadPorLicencia = null;
+			Novedad novedadPorInasistenciaSinJustificar = null;
+			if (licenciaEmpleado != null) {
 				int diasRestantes = licenciaEmpleado.getCantDisponible();
-				if(diasRestantes-cantDiasAusente<0){
+				if (diasRestantes - cantDiasAusente < 0) {
 					Licencia licenciaSinJustificar = LicenciaSRV.buscarLicencia(3);
-					novedadPorInasistenciaSinJustificar = new Novedad(fecha,licenciaSinJustificar,horasCatedraAusente,semanasMesCorriente,cantDiasAusente - diasRestantes);
-					novedadPorLicencia = new Novedad(fecha,licenciaSinJustificar,horasCatedraAusente,semanasMesCorriente,diasRestantes);
-					if(licenciaDocenteSinJustificar==null){
-						licenciaDocenteSinJustificar = new LicenciaEmpleado(licenciaSinJustificar.getTiempo(),licenciaSinJustificar);
+					novedadPorInasistenciaSinJustificar = new Novedad(fecha, licenciaSinJustificar, horasCatedraAusente,
+							semanasMesCorriente, cantDiasAusente - diasRestantes);
+					novedadPorLicencia = new Novedad(fecha, licenciaSinJustificar, horasCatedraAusente,
+							semanasMesCorriente, diasRestantes);
+					if (licenciaDocenteSinJustificar == null) {
+						licenciaDocenteSinJustificar = new LicenciaEmpleado(licenciaSinJustificar.getTiempo(),
+								licenciaSinJustificar);
 						empleado.agregarLicenciaEmpleado(licenciaDocenteSinJustificar);
 					}
 					licenciaEmpleado.setCantDisponible(0);
-					licenciaDocenteSinJustificar.setCantDisponible(licenciaDocenteSinJustificar.getCantDisponible()-(cantDiasAusente - diasRestantes));
-					
-				}else{
-					novedadPorLicencia = new Novedad(fecha,licencia,horasCatedraAusente,semanasMesCorriente,cantDiasAusente);
+					licenciaDocenteSinJustificar.setCantDisponible(
+							licenciaDocenteSinJustificar.getCantDisponible() - (cantDiasAusente - diasRestantes));
+
+				} else {
+					novedadPorLicencia = new Novedad(fecha, licencia, horasCatedraAusente, semanasMesCorriente,
+							cantDiasAusente);
 					licenciaEmpleado.setCantDisponible(diasRestantes - cantDiasAusente);
 				}
-			}else{
-				if(empleado.getAntiguedad()>licencia.getAntiguedadRequerida()){
+			} else {
+				if (empleado.getAntiguedad() > licencia.getAntiguedadRequerida()) {
 					licenciaEmpleado = new LicenciaEmpleado(licencia.getTiempo(), licencia);
 					empleado.agregarLicenciaEmpleado(licenciaEmpleado);
-					if(cantDiasAusente>licenciaEmpleado.getCantDisponible()){
+					if (cantDiasAusente > licenciaEmpleado.getCantDisponible()) {
 						Licencia licenciaSinJustificar = LicenciaSRV.buscarLicencia(3);
-						novedadPorInasistenciaSinJustificar = new Novedad(fecha,licenciaSinJustificar,horasCatedraAusente,semanasMesCorriente,cantDiasAusente - licenciaEmpleado.getCantDisponible());
-						novedadPorLicencia = new Novedad(fecha,licencia,horasCatedraAusente,semanasMesCorriente,licenciaEmpleado.getCantDisponible());
-						if(licenciaDocenteSinJustificar==null){
-							licenciaDocenteSinJustificar = new LicenciaEmpleado(licenciaSinJustificar.getTiempo(),licenciaSinJustificar);
+						novedadPorInasistenciaSinJustificar = new Novedad(fecha, licenciaSinJustificar,
+								horasCatedraAusente, semanasMesCorriente,
+								cantDiasAusente - licenciaEmpleado.getCantDisponible());
+						novedadPorLicencia = new Novedad(fecha, licencia, horasCatedraAusente, semanasMesCorriente,
+								licenciaEmpleado.getCantDisponible());
+						if (licenciaDocenteSinJustificar == null) {
+							licenciaDocenteSinJustificar = new LicenciaEmpleado(licenciaSinJustificar.getTiempo(),
+									licenciaSinJustificar);
 							empleado.agregarLicenciaEmpleado(licenciaDocenteSinJustificar);
 						}
 						licenciaEmpleado.setCantDisponible(0);
-						licenciaDocenteSinJustificar.setCantDisponible(licenciaDocenteSinJustificar.getCantDisponible()-(cantDiasAusente - licenciaEmpleado.getCantDisponible()));
-					}else{
-						novedadPorLicencia = new Novedad(fecha,licencia,horasCatedraAusente,semanasMesCorriente,cantDiasAusente);
+						licenciaDocenteSinJustificar.setCantDisponible(licenciaDocenteSinJustificar.getCantDisponible()
+								- (cantDiasAusente - licenciaEmpleado.getCantDisponible()));
+					} else {
+						novedadPorLicencia = new Novedad(fecha, licencia, horasCatedraAusente, semanasMesCorriente,
+								cantDiasAusente);
 						licenciaEmpleado.setCantDisponible(licenciaEmpleado.getCantDisponible() - cantDiasAusente);
 					}
-				}else{
+				} else {
 					Licencia licenciaSinJustificar = LicenciaSRV.buscarLicencia(3);
-					if(licenciaDocenteSinJustificar==null){
-						licenciaDocenteSinJustificar = new LicenciaEmpleado(licenciaSinJustificar.getTiempo(),licenciaSinJustificar);
+					if (licenciaDocenteSinJustificar == null) {
+						licenciaDocenteSinJustificar = new LicenciaEmpleado(licenciaSinJustificar.getTiempo(),
+								licenciaSinJustificar);
 						empleado.agregarLicenciaEmpleado(licenciaDocenteSinJustificar);
 					}
-					novedadPorInasistenciaSinJustificar = new Novedad(fecha,licenciaSinJustificar,horasCatedraAusente,semanasMesCorriente,cantDiasAusente);
-					
+					novedadPorInasistenciaSinJustificar = new Novedad(fecha, licenciaSinJustificar, horasCatedraAusente,
+							semanasMesCorriente, cantDiasAusente);
+
 				}
 			}
-			if(novedadPorLicencia!=null){
+			if (novedadPorLicencia != null) {
 				empleado.agregarNovedad(novedadPorLicencia);
 			}
-			if(novedadPorInasistenciaSinJustificar!=null){
+			if (novedadPorInasistenciaSinJustificar != null) {
 				empleado.agregarNovedad(novedadPorInasistenciaSinJustificar);
 			}
 			EmpleadoSRV.actualizarEmpleado(empleado);
 		}
-		
+
 	}
-	
-	
 
 	public Vector<Novedad> buscarNovedad(String tipo, String motivo, Date fechaInicio, Date fechaHasta, String dni) {
 		Vector<Novedad> novedadesAux = new Vector<Novedad>();
@@ -694,7 +727,6 @@ public class Sistema {
 		}
 		return novedadesAux;
 	}
-
 
 	public List<Clase> getClases() {
 		return ClaseSRV.cargarClases();
@@ -714,7 +746,7 @@ public class Sistema {
 	}
 
 	public int cantidadSemandasMes(int mes) {
-		
+
 		Calendar cal = GregorianCalendar.getInstance();
 		cal.set(Calendar.DAY_OF_MONTH, 1);
 		cal.set(Calendar.MONTH, mes);
@@ -745,16 +777,67 @@ public class Sistema {
 		float descuentoTotal = 0;
 		int mes = (new Date().getMonth()) + 1;
 		if (empleadoS != null) {
-			descuentoTotal = calcularDescuento(dni, mes,0);
+			descuentoTotal = calcularDescuento(dni, mes, 0);
 			return descuentoTotal;
 		}
 		if (empleadoC != null) {
 			for (Cargo cargo : empleadoC.getCargos()) {
-				descuentoTotal += calcularDescuento(dni,mes,cargo.getSueldoDiaDeTrabajo());
+				descuentoTotal += calcularDescuento(dni, mes, cargo.getSueldoDiaDeTrabajo());
 			}
 			return descuentoTotal;
 		}
 		return 0;
+	}
+
+	public Empleado buscarEmpleadoActivo(String dni) {
+		Empleado empleado = EmpleadoSRV.buscarEmpleadoActivo(dni);
+		return empleado;
+	}
+
+	public String liquidarMes(int mes, int nroEscuela) {
+		File archivo = new File("C:/Users/juancruz/Documents/archivo.txt");
+		String stringArchivo = "";
+		List<ConCargo> empleados = EmpleadoSRV.recuperarEmpleadosPorEscuela(nroEscuela);
+		List<SinCargo> docentes = EmpleadoSRV.recuperarDocentesPorEscuela(nroEscuela);
+		Date fechaActual = new Date();
+		String diaStr = String.valueOf(fechaActual.getDay());
+		String mesStr = String.valueOf(fechaActual.getMonth() + 1);
+		String anioStr = String.valueOf(fechaActual.getYear() + 1900).substring(2, 4);
+		if (Integer.parseInt(mesStr) < 10)
+			mesStr = "0" + mesStr;
+		if (Integer.parseInt(diaStr) < 10)
+			diaStr = "0" + diaStr;
+		String stringFecha = diaStr + mesStr + anioStr;
+		System.out.println("dia: " + diaStr + " mes:" + mesStr + " año:" + anioStr);
+		if (empleados != null) {
+			for (ConCargo empleado : empleados) {
+				for (Cargo cargo : empleado.getCargos()) {
+					int sueldo = (int) calcularSueldo(empleado.getDni(), mes);
+					String auxSueldo = "";
+					while ((auxSueldo + sueldo).length() < 10) {
+						auxSueldo = auxSueldo + "0";
+					}
+					auxSueldo = auxSueldo + sueldo;
+					String concepto = cargo.getNombre().substring(0, 5);
+					stringArchivo = stringArchivo + empleado.getCuil() + concepto + stringFecha + auxSueldo + "001\n";
+				}
+			}
+		}
+		if (docentes != null) {
+			for (SinCargo docente : docentes) {
+				int sueldo = (int) calcularSueldo(docente.getDni(), mes);
+				String auxSueldo = "";
+				while ((auxSueldo + sueldo).length() < 10) {
+					auxSueldo = auxSueldo + "0";
+				}
+				auxSueldo = auxSueldo + sueldo;
+				String concepto = "profs";
+				System.out.println(stringFecha);
+				System.out.println(auxSueldo);
+				stringArchivo = stringArchivo + docente.getCuil() + concepto + stringFecha + auxSueldo + "001\n";
+			}
+		}
+		return stringArchivo;
 	}
 
 }

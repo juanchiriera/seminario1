@@ -26,9 +26,9 @@ public class HibernateEmpleadoDAO {
 
 	public Empleado buscarEmpleado(String dni) {
 		Session session = sf.openSession();
-		Query q = session.createQuery("from Empleado e where e.dni = :dni and e.estado=true");
+		Query q = session.createQuery("from Empleado e where e.dni = :dni");
 		q.setParameter("dni", dni);
-		Empleado e = (Empleado) q.uniqueResult();
+		Empleado e = (Empleado) (q.list()).get(0);
 		session.close();
 		return e;
 	}
@@ -151,5 +151,32 @@ public class HibernateEmpleadoDAO {
 //		q.executeUpdate();
 //		session.beginTransaction();
 //		session.close();
+	}
+
+	public Empleado buscarEmpleadoActivo(String dni) {
+		Session session = sf.openSession();
+		Query q = session.createQuery("from Empleado e where e.dni = :dni and e.estado=true");
+		q.setParameter("dni", dni);
+		Empleado e = (Empleado) (q.list()).get(0);
+		session.close();
+		return e;
+	}
+
+	public List<ConCargo> recuperarEmpleadosPorEscuela(int nroEscuela) {
+		Session session = sf.openSession();
+		Query q = session.createQuery("from ConCargo c where c.escuela.nro = :nroEscuela and c.estado=true");
+		q.setParameter("nroEscuela", nroEscuela);
+		List<ConCargo> e = (List<ConCargo>) q.list();
+		session.close();
+		return e;
+	}
+
+	public List<SinCargo> recuperarDocentesPorEscuela(int nroEscuela) {
+		Session session = sf.openSession();
+		Query q = session.createQuery("from SinCargo c where c.escuela.nro = :nroEscuela and c.estado=true");
+		q.setParameter("nroEscuela", nroEscuela);
+		List<SinCargo> e = (List<SinCargo>) q.list();
+		session.close();
+		return e;
 	}
 }

@@ -54,9 +54,6 @@ public class SinCargo  extends Empleado{
 	}
 
 	public Collection<Clase> getClases() {
-		if(clases == null){
-			clases = new Vector<Clase>();
-		}
 		return clases;
 	}
 

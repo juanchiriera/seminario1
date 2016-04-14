@@ -67,7 +67,7 @@ prefix="c" %>
 	  					<br>
 						Clase:
 						<select id="clase" name="clase" class="form-control">
-									<c:forEach var="clase" items="${docente.getClases()}">
+									<c:forEach var="clase" items="${docente.clases}">
 										<option value="${clase.nroClase}">${clase.getNombre()} - ${clase.getCurso()} - ${clase.getDivision()}</option>
 									</c:forEach>
 						</select>

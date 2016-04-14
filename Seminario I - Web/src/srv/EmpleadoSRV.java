@@ -58,6 +58,15 @@ public class EmpleadoSRV {
 	public static void eliminarEmpleado(ConCargo empleado) {
 		HibernateEmpleadoDAO.getInstancia().eliminarEmpleado(empleado);
 	}
+	public static Empleado buscarEmpleadoActivo(String dni) {
+		return HibernateEmpleadoDAO.getInstancia().buscarEmpleadoActivo(dni);
+	}
+	public static List<ConCargo> recuperarEmpleadosPorEscuela(int nroEscuela) {
+		return HibernateEmpleadoDAO.getInstancia().recuperarEmpleadosPorEscuela(nroEscuela);
+	}
+	public static List<SinCargo> recuperarDocentesPorEscuela(int nroEscuela) {
+		return HibernateEmpleadoDAO.getInstancia().recuperarDocentesPorEscuela(nroEscuela);
+	}
 	
 	
 }
