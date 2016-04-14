@@ -36,10 +36,9 @@ prefix="c" %>
 
 			<div class="2 main">
 				<div></div>
-				<h1 class="page-header" style="margin-top: 15px;">
-					<button type="button" style="" class="btn btn-default btn-lg">
-						<span class="glyphicon glyphicon-oil"></span>
-					</button>
+				<h1 class="page-header" style="
+					margin-top: 15px;
+					margin-left: 18px;">
 					Consulta de Inasistencias
 				</h1>
 

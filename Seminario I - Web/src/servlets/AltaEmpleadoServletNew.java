@@ -32,9 +32,13 @@ public class AltaEmpleadoServletNew extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Escuela> escuelas = Sistema.getInstancia().recuperarEscuelas();
-		request.setAttribute("escuelas", escuelas);
-		getServletContext().getRequestDispatcher("/AltaEmpleado.jsp").forward(request, response);
+		try{
+			List<Escuela> escuelas = Sistema.getInstancia().recuperarEscuelas();
+			request.setAttribute("escuelas", escuelas);
+			getServletContext().getRequestDispatcher("/AltaEmpleado.jsp").forward(request, response);
+		}catch(Exception e){
+			getServletContext().getRequestDispatcher("/Error.jsp").forward(request, response);
+		}
 	}
 
 	/**

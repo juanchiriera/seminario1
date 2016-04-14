@@ -301,8 +301,7 @@ public class Sistema {
 		return mostrarDatos;
 	}
 
-	// --------------------------ADMINISTRACION DE
-	// LICENCIAS----------------------//
+	// --------------------------ADMINISTRACION DE LICENCIAS----------------------//
 
 	// Para filtrar la busqueda por alguno de los campos
 	public Vector<Licencia> buscarLicencias(String codigo, String tipo, String motivo) {
