@@ -33,23 +33,27 @@ public class BuscarProfesorServletNew extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Materia> materias = new Vector<Materia>();
-		for (Materia materia : Materia.values()) {
-			materias.add(materia);
+		try{
+			List<Materia> materias = new Vector<Materia>();
+			for (Materia materia : Materia.values()) {
+				materias.add(materia);
+			}
+			List<Curso> cursos = new Vector<Curso>();
+			for (Curso curso : Curso.values()) {
+				cursos.add(curso);
+			}
+			List<Division> divisiones = new Vector<Division>();
+			for (Division division : Division.values()) {
+				divisiones.add(division);
+			}
+			request.setAttribute("materias", materias);
+			request.setAttribute("cursos", cursos);
+			request.setAttribute("divisiones", divisiones);
+			
+			getServletContext().getRequestDispatcher("/BuscarProfesor.jsp").forward(request, response);
+		}catch(Exception e){
+			getServletContext().getRequestDispatcher("/Error.jsp").forward(request, response);
 		}
-		List<Curso> cursos = new Vector<Curso>();
-		for (Curso curso : Curso.values()) {
-			cursos.add(curso);
-		}
-		List<Division> divisiones = new Vector<Division>();
-		for (Division division : Division.values()) {
-			divisiones.add(division);
-		}
-		request.setAttribute("materias", materias);
-		request.setAttribute("cursos", cursos);
-		request.setAttribute("divisiones", divisiones);
-		
-		getServletContext().getRequestDispatcher("/BuscarProfesor.jsp").forward(request, response);
 	}
 
 	/**

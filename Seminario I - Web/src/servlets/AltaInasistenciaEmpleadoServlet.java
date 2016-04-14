@@ -32,18 +32,22 @@ public class AltaInasistenciaEmpleadoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String fecha = request.getParameter("classDate");
-		String dni = request.getParameter("dni");
-		int codigoLicencia =Integer.parseInt(request.getParameter("licencia"));
-		int cantDiasAusente = Integer.parseInt(request.getParameter("cantDiasAusente"));
-		String [] dateAux = fecha.split("-");
-		int year = Integer.parseInt(dateAux[0]);
-		int month = Integer.parseInt(dateAux[1]);
-		int day = Integer.parseInt(dateAux[2]);
-		Date fechaF = new Date(year-1900,month-1,day);
-		Licencia licencia = Sistema.getInstancia().buscarLicencia(codigoLicencia);
-		Sistema.getInstancia().cargarInasistenciaEmpleado(dni, fechaF, licencia, 0, cantDiasAusente);
-		response.sendRedirect("home.jsp");
+		try{
+			String fecha = request.getParameter("classDate");
+			String dni = request.getParameter("dni");
+			int codigoLicencia =Integer.parseInt(request.getParameter("licencia"));
+			int cantDiasAusente = Integer.parseInt(request.getParameter("cantDiasAusente"));
+			String [] dateAux = fecha.split("-");
+			int year = Integer.parseInt(dateAux[0]);
+			int month = Integer.parseInt(dateAux[1]);
+			int day = Integer.parseInt(dateAux[2]);
+			Date fechaF = new Date(year-1900,month-1,day);
+			Licencia licencia = Sistema.getInstancia().buscarLicencia(codigoLicencia);
+			Sistema.getInstancia().cargarInasistenciaEmpleado(dni, fechaF, licencia, 0, cantDiasAusente);
+			response.sendRedirect("home.jsp");
+		}catch(Exception e){
+			getServletContext().getRequestDispatcher("/Error.jsp").forward(request, response);
+		}
 	}
 
 	/**

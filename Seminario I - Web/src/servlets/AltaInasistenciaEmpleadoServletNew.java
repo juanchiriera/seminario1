@@ -36,11 +36,15 @@ public class AltaInasistenciaEmpleadoServletNew extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<ConCargo> empleados = Sistema.getInstancia().recuperarEmpleadosConCargo();
-		request.setAttribute("empleados", empleados);
-		List<Licencia> licencias = Sistema.getInstancia().recuperarLicencias();
-		request.setAttribute("licencias", licencias);
-		getServletContext().getRequestDispatcher("/AltaInasistenciaEmpleado.jsp").forward(request, response);
+		try{
+			List<ConCargo> empleados = Sistema.getInstancia().recuperarEmpleadosConCargo();
+			request.setAttribute("empleados", empleados);
+			List<Licencia> licencias = Sistema.getInstancia().recuperarLicencias();
+			request.setAttribute("licencias", licencias);
+			getServletContext().getRequestDispatcher("/AltaInasistenciaEmpleado.jsp").forward(request, response);
+		}catch(Exception e){
+			getServletContext().getRequestDispatcher("/Error.jsp").forward(request, response);
+		}
 	}
 
 	/**

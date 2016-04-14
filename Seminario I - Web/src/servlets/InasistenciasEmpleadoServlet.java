@@ -34,10 +34,14 @@ public class InasistenciasEmpleadoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String dni = request.getParameter("dni");
-		InasistenciaV inasistencia = Sistema.getInstancia().mostrarInasistencias(dni);
-		request.setAttribute("inasistencia", inasistencia);
-		getServletContext().getRequestDispatcher("/VerInasistenciasEmpleado.jsp").forward(request, response);
+		try{
+			String dni = request.getParameter("dni");
+			InasistenciaV inasistencia = Sistema.getInstancia().mostrarInasistencias(dni);
+			request.setAttribute("inasistencia", inasistencia);
+			getServletContext().getRequestDispatcher("/VerInasistenciasEmpleado.jsp").forward(request, response);
+		}catch(Exception e){
+			getServletContext().getRequestDispatcher("/Error.jsp").forward(request, response);
+		}
 	}
 
 	/**

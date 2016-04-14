@@ -30,19 +30,21 @@ public class AsignarCargosServletNew extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String dniEmpleadoAux = request.getParameter("empleado");
-		String [] empleadoArray = dniEmpleadoAux.split("-");
-		String dni = empleadoArray[1].trim();
-		
-		String idCargoAux = request.getParameter("cargo");
-		String [] cargoArray = idCargoAux.split("-");
-		int idCargo = Integer.parseInt(cargoArray[0].trim());
-		
-		Cargo cargo = Sistema.getInstancia().buscarCargo(idCargo);
-		Sistema.getInstancia().asignarCargo(dni, cargo);
-		response.sendRedirect("home.jsp");
-		
+		try{
+			String dniEmpleadoAux = request.getParameter("empleado");
+			String [] empleadoArray = dniEmpleadoAux.split("-");
+			String dni = empleadoArray[1].trim();
+			
+			String idCargoAux = request.getParameter("cargo");
+			String [] cargoArray = idCargoAux.split("-");
+			int idCargo = Integer.parseInt(cargoArray[0].trim());
+			
+			Cargo cargo = Sistema.getInstancia().buscarCargo(idCargo);
+			Sistema.getInstancia().asignarCargo(dni, cargo);
+			response.sendRedirect("home.jsp");
+		}catch(Exception e){
+			getServletContext().getRequestDispatcher("/Error.jsp").forward(request, response);
+		}
 	}
 
 	/**
