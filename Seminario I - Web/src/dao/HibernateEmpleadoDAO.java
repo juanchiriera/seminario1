@@ -26,7 +26,7 @@ public class HibernateEmpleadoDAO {
 
 	public Empleado buscarEmpleado(String dni) {
 		Session session = sf.openSession();
-		Query q = session.createQuery("from Empleado e where e.dni = :dni");
+		Query q = session.createQuery("from Empleado e where e.dni = :dni and e.estado=true");
 		q.setParameter("dni", dni);
 		Empleado e = (Empleado) q.uniqueResult();
 		session.close();
@@ -145,11 +145,11 @@ public class HibernateEmpleadoDAO {
 
 	public void eliminarEmpleado(ConCargo empleado) {
 		Session session = sf.openSession();
-		Query q = session.createQuery("delete from Empleado e where e.dni = :dni");
-		q.setParameter("dni", empleado.getDni());
-		session.beginTransaction();
-		session.getTransaction().commit();
-		session.flush();
-		session.close();
+//		Query q = session.createQuery("delete Empleado where dni = :dni");
+//		q.setParameter("dni", empleado.getDni());
+		session.delete(empleado);
+//		q.executeUpdate();
+//		session.beginTransaction();
+//		session.close();
 	}
 }

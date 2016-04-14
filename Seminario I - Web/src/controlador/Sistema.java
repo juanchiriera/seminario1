@@ -120,7 +120,8 @@ public class Sistema {
 			//TODO ARREGLAR!!
 			ConCargo empleado = EmpleadoSRV.buscarEmpleadoConCargo(dni);
 			profesor = new SinCargo(empleado);
-			EmpleadoSRV.eliminarEmpleado(empleado);
+			empleado.setEstado(false);
+			EmpleadoSRV.grabarEmpleado(empleado);
 		}
 		if (!profesor.tenesClase(clase.getDivision(), clase.getCurso())) {
 			profesor.getClases().add(clase);
@@ -257,7 +258,7 @@ public class Sistema {
 			float sueldoBruto = empleadoC.calcularSueldo();
 			float descuento = 0;
 			for (Cargo cargo : empleadoC.getCargos()) {
-				descuento += calcularDescuento(dni,mes,cargo.getSueldoBasico());
+				descuento += calcularDescuento(dni,mes,cargo.getSueldoDiaDeTrabajo());
 			}
 			sueldoTotal = sueldoBruto - descuento;
 			return sueldoTotal;
@@ -749,7 +750,7 @@ public class Sistema {
 		}
 		if (empleadoC != null) {
 			for (Cargo cargo : empleadoC.getCargos()) {
-				descuentoTotal += calcularDescuento(dni,mes,cargo.getSueldoBasico());
+				descuentoTotal += calcularDescuento(dni,mes,cargo.getSueldoDiaDeTrabajo());
 			}
 			return descuentoTotal;
 		}

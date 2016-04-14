@@ -21,7 +21,7 @@ import view.SueldoV;
 @Entity
 @DiscriminatorValue("SC")
 public class SinCargo  extends Empleado{
-	@ManyToMany(cascade=CascadeType.REFRESH)
+	@ManyToMany(cascade=CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name="clase_profesor", 
 	joinColumns={@JoinColumn(name="dni")},
@@ -50,6 +50,7 @@ public class SinCargo  extends Empleado{
 		this.licenciasEmpleados = empleado.getLicenciasEmpleados();
 		this.novedades = empleado.getNovedades();
 		this.clases = new Vector<Clase>();
+		this.antiguedad = empleado.getAntiguedad();
 	}
 
 	public Collection<Clase> getClases() {
@@ -83,7 +84,7 @@ public class SinCargo  extends Empleado{
 			float hsSemanales = clase.getHsSemanales();
 			basico += valorHc * hsSemanales;
 			porAntiguedad = basico * this.antiguedad / 100;
-			float zona = this.escuela.getCargoZona();
+			float zona = this.escuela.getCargoZona()/100;
 			porZona += basico * zona; //porque tiene que figurar un solo importe por zona
 		}
 		return basico + porAntiguedad + porZona;

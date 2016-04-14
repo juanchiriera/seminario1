@@ -118,7 +118,7 @@ public class Novedad {
 	public float obtenerDescuentoTotal(float sumaBasicos){
 		float descuentoLicencia = 0;
 		if(clase==null){
-			descuentoLicencia = this.licencia.getHaberes() * sumaBasicos;
+			descuentoLicencia = this.licencia.getHaberes() * sumaBasicos * cantDiasAusente;
 		}else{
 			descuentoLicencia = this.licencia.getHaberes() * clase.getValor_hc() * horasCatedraAusente;
 		}

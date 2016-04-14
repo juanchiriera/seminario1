@@ -8,6 +8,8 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -34,6 +36,9 @@ import srv.NovedadSRV;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="tipo", discriminatorType=DiscriminatorType.STRING)
 public abstract class Empleado {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	protected int id;
 	@Column
 	protected String nombre;
 	@Column
@@ -44,7 +49,7 @@ public abstract class Empleado {
 	protected Date fechaDeIngreso;
 	@Column
 	protected String cuil;
-	@Id
+	@Column
 	protected String dni;
 	@Column
 	protected Date fechaDeNacimiento;
