@@ -1,7 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controlador.Sistema;
+import negocio.Clase;
 import negocio.Empleado;
+import negocio.Escuela;
+import negocio.Licencia;
+import negocio.SinCargo;
 
 /**
- * Servlet implementation class DescuentoEmpleadoServlet
+ * Servlet implementation class AltaInasistenciaServletNew
  */
-@WebServlet("/DescuentoEmpleadoServlet")
-public class DescuentoEmpleadoServlet extends HttpServlet {
+@WebServlet("/AltaInasistenciaProfesorServletNew")
+public class AltaInasistenciaProfesorServletNew extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DescuentoEmpleadoServlet() {
+    public AltaInasistenciaProfesorServletNew() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +35,11 @@ public class DescuentoEmpleadoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String dni = request.getParameter("dni");
-		Empleado empleado = Sistema.getInstancia().buscarEmpleado(dni);
-		float descuento = Sistema.getInstancia().calcularDescuentoVista(dni);
-		
-		request.setAttribute("descuento", descuento);
-		request.setAttribute("empleado", empleado);
-		getServletContext().getRequestDispatcher("/VerDescuentosEmpleado.jsp").forward(request, response);
+		List<SinCargo> docentes = Sistema.getInstancia().recuperarProfesores();
+		request.setAttribute("docentes", docentes);
+		List<Licencia> licencias = Sistema.getInstancia().recuperarLicencias();
+		request.setAttribute("licencias", licencias);
+		getServletContext().getRequestDispatcher("/AltaInasistenciaProfesor.jsp").forward(request, response);
 	}
 
 	/**

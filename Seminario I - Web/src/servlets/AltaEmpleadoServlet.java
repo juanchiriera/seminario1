@@ -38,8 +38,8 @@ public class AltaEmpleadoServlet extends HttpServlet {
 		String dni = request.getParameter("dni");
 		int antiguedad = Integer.parseInt(request.getParameter("antiguedad"));
 		String [] dateAux = fechaNacim.split("-");
-		int year = Integer.parseInt(dateAux[0]);
-		int month = Integer.parseInt(dateAux[1]);
+		int year = Integer.parseInt(dateAux[0])-1900;
+		int month = Integer.parseInt(dateAux[1])-1;
 		int day = Integer.parseInt(dateAux[2]);
 		Date fechaNacimiento = new Date(year,month,day);
 		String [] escuelaAux = request.getParameter("escuela").split("-");

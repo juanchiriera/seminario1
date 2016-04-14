@@ -56,7 +56,7 @@ public class ConCargo extends Empleado {
 				basico += cargo.getSueldoBasico();
 				porAntiguedad = basico * this.antiguedad / 100;
 				float zona = this.getEscuela().getCargoZona();
-				porZona += basico * zona;//porque tiene que figurar un solo importe por zona
+				porZona += basico * zona/100;//porque tiene que figurar un solo importe por zona
 			}
 		}
 		return basico + porAntiguedad + porZona;

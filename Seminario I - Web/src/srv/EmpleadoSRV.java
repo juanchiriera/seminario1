@@ -49,6 +49,15 @@ public class EmpleadoSRV {
 		HibernateEmpleadoDAO.getInstancia().actualizarEmpleado(empleado);
 		
 	}
+	public static List<ConCargo> recuperarEmpleadosConCargo() {
+		return HibernateEmpleadoDAO.getInstancia().buscarTodosLosEmpleadosConCargo();
+	}
+	public static List<SinCargo> recuperarProfesores() {
+		return HibernateEmpleadoDAO.getInstancia().buscarTodosLosProfesores();
+	}
+	public static void eliminarEmpleado(ConCargo empleado) {
+		HibernateEmpleadoDAO.getInstancia().eliminarEmpleado(empleado);
+	}
 	
 	
 }

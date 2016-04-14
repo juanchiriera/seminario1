@@ -37,8 +37,8 @@ public class HibernateEmpleadoDAO {
 		Session session = sf.openSession();
 		session.beginTransaction();
 		session.persist(empleado);
-		session.flush();
 		session.getTransaction().commit();
+		session.flush();
 		session.close();
 	}
 
@@ -61,6 +61,7 @@ public class HibernateEmpleadoDAO {
 //		q.setParameter("nroEscuela", nroEscuela);
 		
 		List<Empleado> e = (List<Empleado>) q.list();
+		session.flush();
 		session.close();
 		return e;
 	}
@@ -69,6 +70,7 @@ public class HibernateEmpleadoDAO {
 		Session session = sf.openSession();
 		Query q = session.createQuery("from Empleado");
 		List<Empleado> e = (List<Empleado>) q.list();
+		session.flush();
 		session.close();
 		return e;
 	}
@@ -89,6 +91,7 @@ public class HibernateEmpleadoDAO {
 		q.setParameter("division", division);
 		
 		List<Empleado> e = (List<Empleado>) q.list();
+		session.flush();
 		session.close();
 		return e;
 	}
@@ -97,8 +100,8 @@ public class HibernateEmpleadoDAO {
 		Session session = sf.openSession();
 		session.beginTransaction();
 		session.update(empleado);
-		session.flush();
 		session.getTransaction().commit();
+		session.flush();
 		session.close();
 	}
 
@@ -107,6 +110,8 @@ public class HibernateEmpleadoDAO {
 		Query q = session.createQuery("from ConCargo c where c.dni=:dni");
 		q.setParameter("dni", dni);
 		ConCargo empleado = (ConCargo) q.uniqueResult();
+		session.flush();
+		session.close();
 		return empleado;
 	}
 	
@@ -115,6 +120,36 @@ public class HibernateEmpleadoDAO {
 		Query q = session.createQuery("from SinCargo c where c.dni=:dni");
 		q.setParameter("dni", dni);
 		SinCargo empleado = (SinCargo) q.uniqueResult();
+		session.flush();
+		session.close();
 		return empleado;
+	}
+
+	public List<ConCargo> buscarTodosLosEmpleadosConCargo() {
+		Session session = sf.openSession();
+		Query q = session.createQuery("from ConCargo");
+		List<ConCargo> e = (List<ConCargo>) q.list();
+		session.flush();
+		session.close();
+		return e;
+	}
+
+	public List<SinCargo> buscarTodosLosProfesores() {
+		Session session = sf.openSession();
+		Query q = session.createQuery("from SinCargo");
+		List<SinCargo> e = (List<SinCargo>) q.list();
+		session.flush();
+		session.close();
+		return e;
+	}
+
+	public void eliminarEmpleado(ConCargo empleado) {
+		Session session = sf.openSession();
+		Query q = session.createQuery("delete from Empleado e where e.dni = :dni");
+		q.setParameter("dni", empleado.getDni());
+		session.beginTransaction();
+		session.getTransaction().commit();
+		session.flush();
+		session.close();
 	}
 }

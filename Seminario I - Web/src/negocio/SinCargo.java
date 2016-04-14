@@ -1,5 +1,6 @@
 package negocio;
 
+import java.awt.List;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Vector;
@@ -37,6 +38,20 @@ public class SinCargo  extends Empleado{
 		this.clases = new Vector<Clase>();
 	}
 	
+	public SinCargo(ConCargo empleado) {
+		this.nombre = empleado.getNombre();
+		this.apellido = empleado.getApellido();
+		this.cuil = empleado.getCuil();
+		this.dni = empleado.getDni();
+		this.escuela = empleado.getEscuela();
+		this.estado = true;
+		this.fechaDeIngreso = empleado.getFechaDeIngreso();
+		this.fechaDeNacimiento = empleado.getFechaDeNacimiento();
+		this.licenciasEmpleados = empleado.getLicenciasEmpleados();
+		this.novedades = empleado.getNovedades();
+		this.clases = new Vector<Clase>();
+	}
+
 	public Collection<Clase> getClases() {
 		if(clases == null){
 			clases = new Vector<Clase>();
@@ -59,7 +74,7 @@ public class SinCargo  extends Empleado{
 	
 	//No están contemplados los descuentos, si se calculan en el View, no se que es lo que pretendemos, 
 	//si lo queremos acá es poner que obtenga el descuento como está hecho abajo
-	public float calcularSueldo() {
+	public float calcularSueldoSemanal() {
 		float basico = 0; 
 		float porZona = 0;
 		float porAntiguedad = 0;

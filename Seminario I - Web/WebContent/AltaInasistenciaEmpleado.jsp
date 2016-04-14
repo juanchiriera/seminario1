@@ -47,7 +47,7 @@ prefix="c" %>
 
 				<div class="col-xs-12">
 					<p>Complete todos los campos para ingresar una nueva inasistencia.</p>
-					<form class="col-sm-3 formulario" action="AltaInasistenciaServlet" id="altaInasistenciaForm">
+					<form class="col-sm-3 formulario" action="AltaInasistenciaEmpleadoServlet" id="altaInasistenciaForm">
 						Empleado: 
 	  					<select id="dni" name="dni" class="form-control">
 									<c:forEach var="empleado" items="${empleados}">
@@ -68,17 +68,9 @@ prefix="c" %>
 						Fecha:
 						<input id="fecha" type="date" name="classDate" onselect="google.script.run.dateSelect()" class="form-control">
 						<br>
-	  					<br>
-	  					Semanas mes corriente: 
-	  					<input id="semanas" type="int" name="semanas" class="form-control">
-	 					<br>
-						<br>						
-						Horas cátedra:
-						<input id="horasCatedra" type="float" name="horasCatedra" class="form-control">
 						<br>
-						<br>
-						Cantidad de clases ausente:
-						<input id="cantClasesAusente" type="int" name="cantClasesAusente" class="form-control">
+						Cantidad de dias ausente:
+						<input id="cantDiasAusente" type="int" name="cantDiasAusente" class="form-control">
 						<br>
 						<br>
 	  					<div class="col-sm-offset-2 col-sm-10">

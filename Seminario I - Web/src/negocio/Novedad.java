@@ -11,6 +11,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.hibernate.validator.NotNull;
+
 @Entity
 @Table(name="novedades")
 public class Novedad {
@@ -20,14 +22,16 @@ public class Novedad {
 	private int idNovedad;
 	@Column
 	private Date fecha;
-//	private Clase clase; //volaría esto, porque no se como usarlo, tenemos 2 tipos de empleados, uno con clase y otro con cargo
 	@OneToOne
 	@PrimaryKeyJoinColumn
 	private Licencia licencia;
-	@Column
-	private float oblig_hc_mes; 
+	@Column(nullable=true)
+	private float horasCatedraAusente; 
 	@Column
 	private float oblig_hc_noTrab; 
+	@OneToOne
+	@PrimaryKeyJoinColumn
+	private Clase clase;
 	//en esta última el director ingresa el cálculo de (oblig_hc_mes / semanas del mes corriente) * cantidad de clases que falto (o fraccion)
 	//la lógica la hace él, porque es un dato totalmente dinámico, cambia según las semanas del mes y según que día caiga cada clase
 	//es directamente el valor que tenemos que descontar en concepto de horas no trabajadas
@@ -37,19 +41,16 @@ public class Novedad {
 	@Column
 	private int semanasMesCorriente;
 	@Column
-	private float cantClasesAusente;
-	@Column
-	private String tipo;
-	@Column
-	private String motivo;
+	private int cantDiasAusente;
+
 	
-	public Novedad(Date fecha, Licencia licencia, float oblig_hc_mes, int semanasMesCorriente, float cantClasesAusente) {
+	public Novedad(Date fecha, Licencia licencia, float horasCatedraAusente, int semanasMesCorriente, int cantDiassAusente) {
 		super();
 		this.fecha = fecha;
 		this.licencia = licencia;
-		this.oblig_hc_mes = oblig_hc_mes;
+		this.horasCatedraAusente = horasCatedraAusente;
 		this.semanasMesCorriente = semanasMesCorriente;
-		this.cantClasesAusente = cantClasesAusente;
+		this.cantDiasAusente = cantDiassAusente;
 		setOblig_hc_noTrab();
 	}
 	
@@ -65,13 +66,11 @@ public class Novedad {
 		this.fecha = fecha;
 	}
 
-//	public Clase getClase() {
-//		return clase;
-//	}
-//
-//	public void setClase(Clase clase) {
-//		this.clase = clase;
-//	}
+	public Clase getClase() {
+		return clase;
+	}
+
+
 
 	public Licencia getLicencia() {
 		return licencia;
@@ -82,11 +81,11 @@ public class Novedad {
 	}
 
 	public float getOblig_hc_mes() {
-		return oblig_hc_mes;
+		return horasCatedraAusente;
 	}
 
 	public void setOblig_hc_mes(float oblig_hc_mes) {
-		this.oblig_hc_mes = oblig_hc_mes;
+		this.horasCatedraAusente = oblig_hc_mes;
 	}
 
 	public float getOblig_hc_noTrab() {
@@ -95,7 +94,7 @@ public class Novedad {
 	
 	public void setOblig_hc_noTrab() {
 		//Segun lo aclarado arriba
-		this.oblig_hc_noTrab = (this.oblig_hc_mes / this.semanasMesCorriente) * this.cantClasesAusente;
+		this.oblig_hc_noTrab = (this.horasCatedraAusente / this.semanasMesCorriente) * this.cantDiasAusente;
 	}
 	
 	public int getSemanasMesCorriente() {
@@ -106,37 +105,36 @@ public class Novedad {
 		this.semanasMesCorriente = semanasMesCorriente;
 	}
 
-	public float getCantClasesAusente() {
-		return cantClasesAusente;
+	public int getCantClasesAusente() {
+		return cantDiasAusente;
 	}
 
-	public void setCantClasesAusente(float cantClasesAusente) {
-		this.cantClasesAusente = cantClasesAusente;
+	public void setCantClasesAusente(int cantClasesAusente) {
+		this.cantDiasAusente = cantClasesAusente;
 	}
 
-	public float obtenerDescuentoTotal(float sumaBasicos){
-		float descuentoLicencia = this.licencia.getHaberes() * sumaBasicos;
-		//Por como está definido quedaría simplemente devolver esto el descuento total
-		return this.oblig_hc_noTrab + descuentoLicencia;
-	}
 	
-	public float obtenerDescuentoTotal(){
-		float descuentoLicencia = this.licencia.getHaberes();
+	
+	public float obtenerDescuentoTotal(float sumaBasicos){
+		float descuentoLicencia = 0;
+		if(clase==null){
+			descuentoLicencia = this.licencia.getHaberes() * sumaBasicos;
+		}else{
+			descuentoLicencia = this.licencia.getHaberes() * clase.getValor_hc() * horasCatedraAusente;
+		}
 		//Por como está definido quedaría simplemente devolver esto el descuento total
 		return descuentoLicencia;
 	}
 
-	public String getTipo() {
-		return this.tipo;
-	}
 
-	public String getMotivo() {
-		return this.motivo;
-	}
 	
 	public boolean sosUnaNovedad(String tipo, String motivo, Date fechaInicio, Date fechaHasta) {
 		// TODO Auto-generated method stub
-		return (this.tipo.equals(tipo) || this.motivo.equals(motivo) || (this.fecha.after(fechaInicio) && this.fecha.before(fechaHasta)));
+		return (this.fecha.after(fechaInicio) && this.fecha.before(fechaHasta));
+	}
+
+	public void setClase(Clase clase) {
+		this.clase = clase;
 	}
 
 	

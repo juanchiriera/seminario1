@@ -33,7 +33,7 @@ public class SueldoEmpleadoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String dni = request.getParameter("dni");
 		Empleado e = Sistema.getInstancia().buscarEmpleado(dni);
-		float sueldo = Sistema.getInstancia().calcularSueldo(dni, (new Date()).getMonth());
+		float sueldo = Sistema.getInstancia().calcularSueldo(dni, (new Date()).getMonth()+1);
 		request.setAttribute("sueldo", sueldo);
 		request.setAttribute("empleado", e);
 		getServletContext().getRequestDispatcher("/VerSueldoEmpleado.jsp").forward(request, response);

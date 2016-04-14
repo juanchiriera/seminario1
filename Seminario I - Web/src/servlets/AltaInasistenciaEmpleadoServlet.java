@@ -10,19 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controlador.Sistema;
+import negocio.Clase;
 import negocio.Licencia;
 
 /**
  * Servlet implementation class AltaInasistenciaServlet
  */
-@WebServlet("/AltaInasistenciaServlet")
-public class AltaInasistenciaServlet extends HttpServlet {
+@WebServlet("/AltaInasistenciaEmpleadoServlet")
+public class AltaInasistenciaEmpleadoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AltaInasistenciaServlet() {
+    public AltaInasistenciaEmpleadoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,18 +35,14 @@ public class AltaInasistenciaServlet extends HttpServlet {
 		String fecha = request.getParameter("classDate");
 		String dni = request.getParameter("dni");
 		int codigoLicencia =Integer.parseInt(request.getParameter("licencia"));
-		float horasCatedra = Float.parseFloat(request.getParameter("horasCatedra"));
-		int cantClasesAusente = Integer.parseInt(request.getParameter("cantClasesAusente"));
+		int cantDiasAusente = Integer.parseInt(request.getParameter("cantDiasAusente"));
 		String [] dateAux = fecha.split("-");
 		int year = Integer.parseInt(dateAux[0]);
 		int month = Integer.parseInt(dateAux[1]);
 		int day = Integer.parseInt(dateAux[2]);
-		Date fechaF = new Date(year,month,day);
-		Sistema.getInstancia().cantidadSemandasMes(fechaF.getMonth());
+		Date fechaF = new Date(year-1900,month-1,day);
 		Licencia licencia = Sistema.getInstancia().buscarLicencia(codigoLicencia);
-//		TODO Ver que onda los parametros que paso
-//		Sistema.getInstancia().cargarInasistenciaEmpleado(dni, fechaF, licencia, horasCatedra, cantClasesAusente);
-		Sistema.getInstancia().cargarInasistenciaEmpleado2(dni, fechaF, licencia, horasCatedra, cantClasesAusente);
+		Sistema.getInstancia().cargarInasistenciaEmpleado(dni, fechaF, licencia, 0, cantDiasAusente);
 		response.sendRedirect("home.jsp");
 	}
 

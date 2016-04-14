@@ -49,8 +49,8 @@ prefix="c" %>
 
 						<c:forEach var="licencia" items="${inasistencia.licencias}">
 							<tr>
-								<td>${licencia.getTipoLicencia()}</td>
-								<td>${licencia.getDiasRestantes()}</td>
+								<td>${licencia.getLicencia().getTipo()} - ${licencia.getLicencia().getMotivo()}</td>
+								<td>${licencia.getCantDisponible()}</td>
 							</tr>
 						</c:forEach>
 

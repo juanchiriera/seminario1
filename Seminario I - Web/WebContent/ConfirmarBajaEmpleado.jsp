@@ -30,17 +30,25 @@ prefix="c" %>
 				</h1>
 			</div>
 			
-			
-			<p> Nombre: ${empleado.getNombre()}</p>
-			<p> Apellido: ${empleado.getApellido()}</p>
-			<p> D.N.I.: ${empleado.getDni()}</p>
-			
-			
+			<div class="col-xs-12" style="padding-left: 50px">
+				<form class="col-sm-3 formulario" action="BajaEmpleadoServlet" id="BajaEmpleadoForm">
+					<label> Nombre: ${empleado.getNombre()}</label>
+					<br>
+					<br>
+					<label> Apellido: ${empleado.getApellido()}</label>
+					<br>
+					<br>
+					<label> D.N.I.: ${empleado.getDni()}</label>
+				</form>
+				
 			</div>
 		</div>
+
 		<form method="post" action="BajaEmpleadoServlet" >
-		<input type="text" id="dni" name="dni" value="${empleado.getDni()}" disabled="disabled" style="visibility:hidden"></input>
-		<button  type="submit" class="btn btn-default">Confirmar</button>
+			<input type="text" id="dni" name="dni" value="${empleado.getDni()}" disabled="disabled" style="visibility:hidden"></input>
+			<div class="col-sm-2" style="padding-left: 50px">
+				<button  type="submit" class="btn btn-default">Confirmar</button>
+			</div>
 		</form>
 	</div>
 </body>
