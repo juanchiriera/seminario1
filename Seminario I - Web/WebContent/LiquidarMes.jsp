@@ -49,7 +49,7 @@ prefix="c" %>
 					    padding: 30px;
 					    padding-left: 45px;
 					    width: 50%;
-					    height: 50%;">
+					    height: 30%;">
 	 					
 	 					<div class="form-group">
 							<label for="escuela" class="col-sm-2 control-label">Escuela: </label>
