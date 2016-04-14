@@ -39,23 +39,40 @@
 					    padding: 30px;
 					    padding-left: 45px;
 					    width: 50%;
+					    height: 65%;
 					    padding-right: 45px;
 						padding-top: 30;">
 					    <div class="izquierda">	
 						<b>DNI: ${empleado.getDni()}</b> 
 						<input type="text" id="dni" name="dni" style="visibility: hidden;" value="${empleado.getDni()}">
 						<br><br>
-						<label for="estado" class="control-label">Nombre: </label> 
-						<input type="text" id="nombre" name="nombre" value="${empleado.getNombre()}" ></input>
+						<label for="estado" class="control-label">Nombre: </label>
+						<br>
+						<input type="text" id="nombre" name="nombre" value="${empleado.getNombre()}" class="from-control" style="
+						padding: 6px 12px;
+						border-radius: 4px;
+    					border: 1px solid #ccc;">
 						<br><br>
 						<label for="estado" class="control-label">Apellido: </label> 
-						<input type="text" id="apellido" name="apellido" value="${empleado.getApellido()}"></input>
+						<br>
+						<input type="text" id="apellido" name="apellido" value="${empleado.getApellido()}" class="from-control" style="
+						padding: 6px 12px;
+						border-radius: 4px;
+    					border: 1px solid #ccc;"></input>
 						<br><br>
 						</div>	
-						<div class="derecha">	
+						<div class="derecha">
+						<br><br>	
 						<label for="estado" class="control-label">Antigüedad: </label> 
-						<input type="text" id="antiguedad" name="antiguedad" value="${empleado.getAntiguedad()}"></input>
+						<br>
+						<input type="text" id="antiguedad" name="antiguedad" value="${empleado.getAntiguedad()}" class="from-control" style="
+						padding: 6px 12px;
+						border-radius: 4px;
+    					border: 1px solid #ccc;"></input>
 						<br><br>
+						<br><br>
+						<br><br>
+						
 						<button type="submit" class="btn btn-default">Confirmar</button>
 						</div>
 					</form>	
