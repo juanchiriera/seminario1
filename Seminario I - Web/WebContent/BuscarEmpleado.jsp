@@ -10,6 +10,9 @@ prefix="c" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
+<script type="text/javascript">
+    var hide = '@Session["hide"]';
+</script>
 <head>
 	<%@ include file="/head.html" %>
 	<script>
@@ -90,7 +93,7 @@ prefix="c" %>
 					
 				</div>
 				<div class="col-sm-2">
-						<button onclick="window.location.href='./AltaEmpleadoServletNew'" class="btn btn-default ">Nuevo Empleado</button>
+						<button onclick="window.location.href='./AltaEmpleadoServletNew'" class="btn btn-default " style="display:${hide ? 'none' : 'block'}">Nuevo Empleado</button>
 				</div>
 			</div>
 		</div>

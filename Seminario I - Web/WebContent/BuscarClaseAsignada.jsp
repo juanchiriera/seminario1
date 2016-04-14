@@ -10,6 +10,10 @@ prefix="c" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
+<script type="text/javascript">
+    var hide = '@Session["hide"]';
+</script>
+
 <head>
 	<%@ include file="/head.html" %>
 	<script>
@@ -59,7 +63,7 @@ prefix="c" %>
 					</form>
 				</div>
 				<div>
-					<button onclick="window.location.href='./AsignarClasesServlet'" class="btn btn-default">Asignar Clases</button>
+					<button onclick="window.location.href='./AsignarClasesServlet'" style="display:${hide ? 'none' : 'block'}" class="btn btn-default">Asignar Clases</button>
 				</div>
 			</div>
 		</div>

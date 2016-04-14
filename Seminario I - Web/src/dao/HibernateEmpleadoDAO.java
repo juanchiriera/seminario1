@@ -28,9 +28,17 @@ public class HibernateEmpleadoDAO {
 		Session session = sf.openSession();
 		Query q = session.createQuery("from Empleado e where e.dni = :dni");
 		q.setParameter("dni", dni);
+		try{
 		Empleado e = (Empleado) (q.list()).get(0);
+		session.flush();
 		session.close();
 		return e;
+		}catch(Exception e){
+			session.flush();
+			session.close();
+			return null;
+		}
+
 	}
 
 	public void guardarEmpleado(Empleado empleado) {
@@ -78,17 +86,19 @@ public class HibernateEmpleadoDAO {
 	public List<Empleado> buscarProfesores(String apellido, String nombre, String cuil, String dni, String materia,
 			String curso, String division, boolean estado) {
 		Session session = sf.openSession();
-		Query q = session.createQuery("from SinCargo e where e.dni = :dni or "
-				+ "e.apellido = :apellido or e.nombre=:nombre or e.cuil=:cuil or e.estado=:estado "
-				+ "or e.clases.nombre=:materia or e.clases.curso=curso or e.clases.division=:division");
+		Query q = session.createQuery("from SinCargo e where ((e.dni = :dni or :dni='')"
+				+ "and (e.apellido = :apellido or :apellido='')"
+				+ "and (e.nombre=:nombre or :nombre='')"
+				+ "and (e.cuil=:cuil or :cuil='')"
+				+ "and (e.estado=:estado or :estado=''))");
 		q.setParameter("dni", dni);
 		q.setParameter("apellido", apellido);
 		q.setParameter("nombre", nombre);
 		q.setParameter("cuil", cuil);
 		q.setParameter("estado", estado);
-		q.setParameter("materia", materia);
-		q.setParameter("curso", curso);
-		q.setParameter("division", division);
+//		q.setParameter("materia", materia);
+//		q.setParameter("curso", curso);
+//		q.setParameter("division", division);
 		
 		List<Empleado> e = (List<Empleado>) q.list();
 		session.flush();

@@ -1,3 +1,6 @@
+<script type="text/javascript">
+    var hide = '@Session["hide"]';
+</script>
 <nav role="navigation" class="navbar navbar-default">
         <div class="navbar-header">
             <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
@@ -29,8 +32,9 @@
 					<li><a href="./BuscarProfesorServletNew">Buscar Docente</a></li>
 					<li><a href="./BuscarCargoAsignado.jsp">Cargos Asignados</a></li>
 					<li><a href="./BuscarClaseAsignada.jsp">Clases Asignadas</a></li>
-					<li><a href="BajaEmpleadoB.jsp">Baja</a></li>
-					<li><a href="ModificarEmpleadoB.jsp">Modificar</a></li>
+	
+					<li><a href="BajaEmpleadoB.jsp" style="display:${hide ? 'none' : 'block'}">Baja</a></li>
+					<li><a href="ModificarEmpleadoB.jsp" style="display:${hide ? 'none' : 'block'}">Modificar</a></li>
 				</ul>
 				</li>
 				
@@ -48,13 +52,13 @@
 				<ul class="dropdown-menu">
 					<li><a href="AltaInasistenciaProfesorServletNew">Alta inasistencia Profesores</a></li>
 					<li><a href="AltaInasistenciaEmpleadoServletNew">Alta inasistencia Empleados</a></li>
-					<li><a href="ModificarInasistencia.jsp">Modificar</a></li>
-					<li><a href="VerInasistencia.jsp">Ver Inasistencias</a></li>
+<!-- 					<li><a href="ModificarInasistencia.jsp">Modificar</a></li> -->
+<!-- 					<li><a href="VerInasistencia.jsp">Ver Inasistencias</a></li> -->
 				</ul>
 				</li>
 				
 				
-				<li><a href="LiquidarSueldosServletNew">Generar Liquidacion</a></li>
+				<li><a href="LiquidarSueldosServletNew" style="display:${hide ? 'none' : 'block'}">Generar Liquidacion</a></li>
 				
 				
 				

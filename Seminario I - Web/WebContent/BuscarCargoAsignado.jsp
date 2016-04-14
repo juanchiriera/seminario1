@@ -6,6 +6,10 @@ prefix="c" %>
  if ((session.getAttribute("login") == null) || (session.getAttribute("login") == "")) {
   response.sendRedirect("./index.jsp");
  }
+boolean hide = false;	
+ if((session.getAttribute("login"))!= "admin"){
+	 hide = true;
+ }
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
@@ -69,7 +73,8 @@ prefix="c" %>
 					}
 					</script>
 				</div>
-				<div class="col-sm-2">
+
+				<div class="col-sm-2" style="display:${hide ? 'none' : 'block'}">
 					<button onclick="window.location.href='./AsignarCargosServlet'" class="btn btn-default">Asignar Cargos</button>
 				</div>
 			</div>

@@ -36,6 +36,11 @@ public class LoginServlet extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("login", "ok");
 				session.setAttribute("usuario", Sistema.getInstancia().buscarUsuario(nombreUsuario));
+				if(nombreUsuario.equals("admin")){
+					session.setAttribute("hide", false);
+				}else{
+					session.setAttribute("hide", true);
+				}
 				response.sendRedirect("home.jsp");
 			}else{
 				

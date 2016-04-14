@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -23,14 +24,14 @@ public class Novedad {
 	@Column
 	private Date fecha;
 	@OneToOne
-	@PrimaryKeyJoinColumn
+	@JoinColumn(name="codigoLicencia", referencedColumnName="codigo")
 	private Licencia licencia;
 	@Column(nullable=true)
 	private float horasCatedraAusente; 
 	@Column
 	private float oblig_hc_noTrab; 
 	@OneToOne
-	@PrimaryKeyJoinColumn
+	@JoinColumn(name="nroClase", referencedColumnName="numero")
 	private Clase clase;
 	//en esta última el director ingresa el cálculo de (oblig_hc_mes / semanas del mes corriente) * cantidad de clases que falto (o fraccion)
 	//la lógica la hace él, porque es un dato totalmente dinámico, cambia según las semanas del mes y según que día caiga cada clase

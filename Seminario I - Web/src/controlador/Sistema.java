@@ -127,7 +127,7 @@ public class Sistema {
 			ConCargo empleado = EmpleadoSRV.buscarEmpleadoConCargo(dni);
 			profesor = new SinCargo(empleado);
 			empleado.setEstado(false);
-			EmpleadoSRV.grabarEmpleado(empleado);
+			EmpleadoSRV.eliminarEmpleado(empleado);
 		}
 		if (!profesor.tenesClase(clase.getDivision(), clase.getCurso())) {
 			profesor.getClases().add(clase);

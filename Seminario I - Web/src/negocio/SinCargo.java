@@ -39,16 +39,16 @@ public class SinCargo  extends Empleado{
 	}
 	
 	public SinCargo(ConCargo empleado) {
-		this.nombre = empleado.getNombre();
-		this.apellido = empleado.getApellido();
-		this.cuil = empleado.getCuil();
-		this.dni = empleado.getDni();
-		this.escuela = empleado.getEscuela();
+		this.nombre = String.valueOf(empleado.getNombre());
+		this.apellido = String.valueOf(empleado.getApellido());
+		this.cuil = String.valueOf(empleado.getCuil());
+		this.dni = String.valueOf(empleado.getDni());
+		this.escuela = new Escuela(empleado.getEscuela().getNro(), String.valueOf(empleado.getEscuela().getNombre()), empleado.getEscuela().getCargoZona());
 		this.estado = true;
-		this.fechaDeIngreso = empleado.getFechaDeIngreso();
-		this.fechaDeNacimiento = empleado.getFechaDeNacimiento();
-		this.licenciasEmpleados = empleado.getLicenciasEmpleados();
-		this.novedades = empleado.getNovedades();
+		this.fechaDeIngreso = new Date(empleado.getFechaDeIngreso().getTime());
+		this.fechaDeNacimiento = new Date(empleado.getFechaDeNacimiento().getTime());
+		this.licenciasEmpleados = new Vector<LicenciaEmpleado>();
+		this.novedades = new Vector<Novedad>();
 		this.clases = new Vector<Clase>();
 		this.antiguedad = empleado.getAntiguedad();
 	}

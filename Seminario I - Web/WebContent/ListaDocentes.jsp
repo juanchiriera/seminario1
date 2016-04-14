@@ -41,9 +41,9 @@ prefix="c" %>
 								<th>CUIL</th>
 								<th>Fecha Nacimiento</th>
 								<th>Antiguedad</th>
-								<th>Materia</th>
-								<th>Curso</th>
-								<th>Division</th>
+<!-- 								<th>Materia</th> -->
+<!-- 								<th>Curso</th> -->
+<!-- 								<th>Division</th> -->
 								<th>Estado</th>
 							</tr>
 						</thead>
@@ -57,9 +57,9 @@ prefix="c" %>
 								<td>${docente.getCuil()}</td>
 								<td>${docente.getFechaDeNacimiento()}</td>
 								<td>${docente.getAntiguedad()}</td>
-								<td>${docente.getMateria()}</td>
-								<td>${docente.getCurso()}</td>
-								<td>${docente.getDivision()}</td>
+<%-- 								<td>${docente.getMateria()}</td> --%>
+<%-- 								<td>${docente.getCurso()}</td> --%>
+<%-- 								<td>${docente.getDivision()}</td> --%>
 								<td>${docente.getEstado()}</td>
 							</tr>
 						</c:forEach>

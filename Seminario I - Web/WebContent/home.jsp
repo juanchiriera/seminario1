@@ -10,7 +10,7 @@ prefix="c" %>
 
 	Usuario u = (Usuario) session.getAttribute("usuario");
 	String nombre = u.getNombreUsuario(); 
-
+	
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">

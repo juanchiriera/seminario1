@@ -26,6 +26,7 @@ public class HibernateClaseDAO {
 		Session session = sf.openSession();
 		Query q = session.createQuery("from Clase");
 		List<Clase> c = (List<Clase>) q.list();
+		session.flush();
 		session.close();
 		return c;
 	}
@@ -35,6 +36,7 @@ public class HibernateClaseDAO {
 		Query q = session.createQuery("from Clase c where c.nroClase=:numero");
 		q.setParameter("numero", numero);
 		Clase c = (Clase) q.uniqueResult();
+		session.flush();
 		session.close();
 		return c;
 	}
