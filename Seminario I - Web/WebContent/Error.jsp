@@ -32,14 +32,14 @@ prefix="c" %>
 			 <div class="2 main">
 				<div></div>
 				<h2 class="page-header" style="margin-top: 15px; color: pink;">
-					Juanchi sos tremendo bala
+					Lo sentimos, trabajamos para arreglar este problema :(
 									<script>
 									</script>
 									
 				</h2>
 			</div>
 			
-			<div class="modal-body"> Error: ${empleado.getNombre()}</div>
+			<div class="modal-body"> </div>
 			
 		</div>
 	</div>
